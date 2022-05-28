@@ -1,0 +1,24 @@
+.login-container {
+  h2 {
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .login-form {
+    width: 400px;
+    margin: 0 auto;
+
+    mat-form-field {
+      display: block;
+    }
+
+    .login-btn {
+      display: flex;
+      justify-content: center;
+
+      button {
+        padding: 0 50px;
+      }
+    }
+  }
+}
