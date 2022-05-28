@@ -1,16 +1,17 @@
 .post-confirm {
-  width: 60%;
+  width: 50%;
   margin: 20px auto;
 
-  .title {
-    margin: 15px 0;
-  }
+  .confirm-table {
+    tr {
+      td {
+        padding: 10px 0;
+      }
 
-  .list-group {
-    display: flex;
-
-    .list-title {
-      font-weight: bold;
+      .sub-ttl {
+        padding-right: 20px;
+        font-weight: bold;
+      }
     }
   }
 
@@ -21,7 +22,7 @@
     button {
       margin-bottom: 20px;
       margin-left: 15px;
-      padding: 0 30px;
+      padding: 0 50px;
     }
   }
 }

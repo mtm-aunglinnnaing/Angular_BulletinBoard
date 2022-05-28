@@ -68,15 +68,6 @@ export class PostCreateComponent implements OnInit {
         description: this.postDetail.description
       });
     }
-    //else {
-    //  const data = this.activatedRoute.snapshot.data['post'];
-    //  this.postDetail = data;
-    //    this.status = this.postDetail.status;
-    //    this.postForm.setValue({
-    //      title: this.postDetail.title,
-    //      description: this.postDetail.description
-    //    });
-    //}
   }
 
   public myError = (controlName: string, errorName: string) => {
@@ -99,8 +90,6 @@ export class PostCreateComponent implements OnInit {
       description: this.postForm.value.description
     });
     this.router.navigate(['/post-confirm']);
-
-    console.log(this.postForm.value);
   }
 
   clearData() {

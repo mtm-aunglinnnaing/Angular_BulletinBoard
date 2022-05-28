@@ -1,6 +1,6 @@
 <div class="post-container">
-  <h2 *ngIf="!postId">POST CREATE</h2>
-  <h2 *ngIf="postId">POST UPDATE</h2>
+  <h2 *ngIf="!postId">Create Post</h2>
+  <h2 *ngIf="postId">Update Post</h2>
   <form [formGroup]="postForm" (ngSubmit)="confirmPost()" class="post-form">
     <!-- Title -->
     <mat-form-field appearance="standard" class="form-group">
@@ -14,7 +14,7 @@
     <!-- Description -->
     <mat-form-field appearance="standard" class="form-group">
       <mat-label>Description</mat-label>
-      <textarea matInput rows="4" class="description" formControlName="description" placeholder="Description"></textarea>
+      <textarea matInput rows="5" class="description" formControlName="description" placeholder="Description"></textarea>
       <mat-error *ngIf="myError('description', 'required')">Description is required</mat-error>
     </mat-form-field>
     <!-- /Description -->

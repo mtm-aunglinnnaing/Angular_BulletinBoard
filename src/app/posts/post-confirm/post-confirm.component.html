@@ -1,35 +1,25 @@
-<mat-card class="post-confirm">
-  <mat-card-title *ngIf="!postId" class="title">Create Post Confirmation</mat-card-title>
-  <mat-card-title *ngIf="postId" class="title">Update Post Confirmation</mat-card-title>
-  <mat-card-content class="list-group">
-    <mat-list role="list" class="list-title">
-      <mat-list-item role="listitem">
-        Title
-      </mat-list-item>
-      <mat-list-item role="listitem">
-        Description
-      </mat-list-item>
-      <mat-list-item *ngIf="postData.postId" role="listitem">
-        Status
-      </mat-list-item>
-    </mat-list>
-    <mat-list role="list">
-      <mat-list-item role="listitem">
-        <!--{{postData.form?.title}}-->
-        {{postData.title}}
-      </mat-list-item>
-      <mat-list-item role="listitem">
-        <!--{{postData.form?.description}}-->
-        {{postData.description}}
-      </mat-list-item>
-      <mat-list-item *ngIf="postData.postId" role="listitem">
+<div class="post-confirm">
+  <h2 *ngIf="!postId" class="title">Create Post Confirmation</h2>
+  <h2 *ngIf="postId" class="title">Update Post Confirmation</h2>
+  <table class="confirm-table">
+    <tr>
+      <td class="sub-ttl">Title</td>
+      <td>{{postData.title}}</td>
+    </tr>
+    <tr>
+      <td class="sub-ttl">Description{{postData.postId}}</td>
+      <td>{{postData.description}}</td>
+    </tr>
+    <tr *ngIf="postData.postId">
+      <td class="sub-ttl">Status</td>
+      <td>
         <mat-slide-toggle [checked]="isChecked"></mat-slide-toggle>
-      </mat-list-item>
-    </mat-list>
-  </mat-card-content>
-  <mat-card-actions class="button-group">
+      </td>
+    </tr>
+  </table>
+  <div class="button-group">
     <button mat-flat-button *ngIf="!postData.postId" (click)="createPost()" color="primary">Create</button>
     <button mat-flat-button *ngIf="postData.postId" (click)="createPost()" color="primary">Update</button>
     <button mat-stroked-button (click)="goBackPostCreate()" color="warn">Cancel</button>
-  </mat-card-actions>
-</mat-card>
+  </div>
+</div>
