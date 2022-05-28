@@ -1,0 +1,27 @@
+.post-confirm {
+  width: 60%;
+  margin: 20px auto;
+
+  .title {
+    margin: 15px 0;
+  }
+
+  .list-group {
+    display: flex;
+
+    .list-title {
+      font-weight: bold;
+    }
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      margin-bottom: 20px;
+      margin-left: 15px;
+      padding: 0 30px;
+    }
+  }
+}

@@ -1,0 +1,44 @@
+.post-container {
+  width: 400px;
+  margin: 30px auto;
+  padding: 10px 15px;
+  //box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+
+  h2 {
+    margin: 20px 0 15px 0;
+    text-align: center;
+  }
+
+  .post-form {
+
+    .form-group {
+      display: block;
+      margin-bottom: 5px;
+
+      .description {
+        resize: none;
+      }
+    }
+
+    .status {
+      margin-bottom: 5px;
+
+      mat-label {
+        margin-right: 10px;
+        color: #949494;
+      }
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: flex-end;
+
+      button {
+        margin-bottom: 20px;
+        margin-left: 15px;
+        padding: 0 30px;
+      }
+    }
+  }
+}
