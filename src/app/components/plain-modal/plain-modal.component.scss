@@ -1,0 +1,62 @@
+::ng-deep {
+    .cdk-overlay-pane {
+      width: 60%;
+      margin: auto;
+      .mat-dialog-container {
+        background: #f2f5f5;
+        margin: auto;
+      }
+    }
+  }
+  .content{
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    .note{
+      margin-top: 15px;
+    }
+  }
+  .action{
+      display: flex;
+      justify-content: center;
+      padding: 20px 0;
+  }
+  
+  body {
+      &.modal-open {
+          overflow: hidden;
+      }
+  }
+  
+  .Primary {
+    background-color: #103c9e;
+    border: 1px solid !important;
+    color: white !important;
+    font-family: 'Rubik';
+    font-size: 15px;
+    font-weight: bold;
+    ::ng-deep {
+      * {
+        color: white !important;
+      }
+    }
+    &:hover {
+      &:not([disabled]):not(.Hover-Opacity) {
+        background-color: #103c9e;
+        ::ng-deep {
+          * {
+            color: #fff !important;
+          }
+        }  
+      }
+    }
+    &:active {
+      &:not([disabled]):not(.Hover-Opacity) {
+        background-color: #103c9e;
+        ::ng-deep {
+          * {
+            color: #fff !important;
+          }
+        }  
+      }
+    }
+  }

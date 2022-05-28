@@ -1,0 +1,7 @@
+<div mat-dialog-content class="content">
+  <div>{{data.content}}</div>
+  <div class="note">{{data.note}}</div>
+</div>
+<div mat-dialog-actions class="action">
+  <button mat-raised-button class="Primary" (click)="cancel()"> {{data.applyText || 'OK'}}</button>
+</div>
