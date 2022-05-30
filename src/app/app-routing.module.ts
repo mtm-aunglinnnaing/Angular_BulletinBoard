@@ -9,10 +9,13 @@ import { UserLoginComponent } from './users/user-login/user-login.component';
 //resolver
 import { PostResolver } from './resolver/post.resolver';
 
+//guard
+import { AuthGuard } from './guards/auth.guard';
+
 const routes: Routes = [
   { path: 'login', component: UserLoginComponent },
-  { path: 'post', component: PostCreateComponent },
-  { path: 'post/:id', component: PostCreateComponent, resolve: { post: PostResolver } },
+  { path: 'post', component: PostCreateComponent, canActivate: [AuthGuard] },
+  { path: 'post/:id', component: PostCreateComponent, resolve: { post: PostResolver }, canActivate: [AuthGuard] },
   { path: 'post-confirm', component: PostConfirmComponent }
 ];
 
