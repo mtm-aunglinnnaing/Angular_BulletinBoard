@@ -1,7 +1,23 @@
-.container {
+.mat-elevation-z8 {
   width: 80%;
-  margin: 0 auto;
-}
-table {
-  width: 100%;
+  margin: 8% auto;
+  padding: 2%;
+
+  .filter {
+    display: flex;
+    float: right;
+    width: 48%;
+
+    .opr-btn {
+      width: 80%;
+
+      button {
+        margin: 0 1%;
+      }
+    }
+  }
+
+  table {
+    width: 100%;
+  }
 }

@@ -1,6 +1,17 @@
-
 <div class="mat-elevation-z8">
-  
+  <div class="filter">
+    <mat-form-field apperance="standard">
+      <mat-label>Search User</mat-label>
+      <input matInput placeholder="Search" type="text" #input>
+    </mat-form-field>
+    <div class="opr-btn">
+      <button mat-raised-button color="primary" class="btn btn-sm btn-primary ml-1" (click)="applyFilter(input.value)">Search</button>
+      <button mat-raised-button color="primary" class="btn btn-sm btn-primary ml-1">Add</button>
+      <button mat-raised-button color="primary" class="btn btn-sm btn-primary ml-1">Upload</button>
+      <button mat-raised-button color="primary" class="btn btn-sm btn-primary ml-1">Download</button>
+    </div>
+  </div>
+
   <table mat-table mat-Sort [dataSource]="dataSource">
 
     <!-- Position Column -->
@@ -30,13 +41,9 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-    <tr>
-      <td></td>
-    </tr>
+
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
-                 showFirstLastButtons 
-                 aria-label="Select page of periodic elements">
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
   </mat-paginator>
 </div>

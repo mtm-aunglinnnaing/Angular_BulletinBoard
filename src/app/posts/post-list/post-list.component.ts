@@ -27,7 +27,7 @@ export class PostListComponent implements OnInit {
   constructor(private postSvc: PostService) { }
 
   ngOnInit(): void {
-    
+
     this.postSvc.getPost().subscribe((data) => {
       console.log(data);
       this.posts = data;
@@ -35,7 +35,11 @@ export class PostListComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
     })
   }
-
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
+    this.dataSource.filter = filterValue;
+  }
 }
 
 
