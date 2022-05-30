@@ -12,7 +12,7 @@ export class UsersService {
   constructor(private http: HttpClient) { }
 
   getUser(): Observable<any> {
-    const url = this.apiUrl + '/posts';
+    const url = this.apiUrl + '/users';
     return this.http.get(url);
   }
 

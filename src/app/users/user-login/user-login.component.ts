@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { UsersService } from 'src/app/services/users.service';
-import { IncorrectDialogComponent } from 'src/app/components/incorrect-dialog/incorrect-dialog.component';
+import { PlainModalComponent } from 'src/app/components/plain-modal/plain-modal.component';
 
 @Component({
   selector: 'app-user-login',
@@ -49,9 +49,12 @@ export class UserLoginComponent implements OnInit {
         }
         localStorage.setItem("userInfo", JSON.stringify(user));
       } else {
-        this.dialog.open(IncorrectDialogComponent, {
-          width: '300px',
-          panelClass: 'user-dialog'
+        this.dialog.open(PlainModalComponent, {
+          data: {
+            content: `Email or password is incorrect...`,
+            note: '',
+            applyText: 'Ok'
+          }
         });
       }
 

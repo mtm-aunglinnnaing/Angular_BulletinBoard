@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        if (this.router.url === '/login') {
+        if (this.router.url === '/login' || this.router.url === '/') {
           this.showNavBar = false;
         } else {
           this.showNavBar = true;

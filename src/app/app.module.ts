@@ -11,7 +11,6 @@ import { AppComponent } from './app.component';
 import { PostCreateComponent } from './posts/post-create/post-create.component';
 import { PostConfirmComponent } from './posts/post-confirm/post-confirm.component';
 import { UserLoginComponent } from './users/user-login/user-login.component';
-import { IncorrectDialogComponent } from './components/incorrect-dialog/incorrect-dialog.component';
 import { PlainModalComponent } from './components/plain-modal/plain-modal.component';
 
 @NgModule({
@@ -20,8 +19,7 @@ import { PlainModalComponent } from './components/plain-modal/plain-modal.compon
     PostCreateComponent,
     PostConfirmComponent,
     PlainModalComponent,
-    UserLoginComponent,
-    IncorrectDialogComponent
+    UserLoginComponent
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,7 @@ import { UserLoginComponent } from './users/user-login/user-login.component';
 import { PostResolver } from './resolver/post.resolver';
 
 const routes: Routes = [
+  { path: '', component: UserLoginComponent },
   { path: 'login', component: UserLoginComponent },
   { path: 'post', component: PostCreateComponent },
   { path: 'post/:id', component: PostCreateComponent, resolve: { post: PostResolver } },
