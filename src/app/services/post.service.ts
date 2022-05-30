@@ -15,6 +15,11 @@ export class PostService {
     return this.http.get(url);
   }
 
+  geAllPost(): Observable<any> {
+    const url = this.apiUrl + '/posts';
+    return this.http.get(url);
+  }
+  
   getPostDetail(postId: number): Observable<any> {
     const url = this.apiUrl + '/posts/' + postId;
     return this.http.get(url);
