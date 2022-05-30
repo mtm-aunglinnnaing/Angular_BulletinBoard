@@ -8,7 +8,7 @@ import { PostService } from 'src/app/services/post.service';
 import { SharingDataService } from 'src/app/services/sharing-data.service';
 
 //pages
-import { PlainModalComponent } from '../components/plain-modal/plain-modal.component';
+import { PlainModalComponent } from 'src/app/components/plain-modal/plain-modal.component';
 
 @Component({
   selector: 'app-post-confirm',
