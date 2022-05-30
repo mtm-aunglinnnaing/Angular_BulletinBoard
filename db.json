@@ -1,6 +1,36 @@
 {
   "posts": [
     {
+      "title": "Edit Post",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n\n",
+      "status": 1,
+      "created_user_id": 1,
+      "updated_user_id": 1,
+      "created_at": "2022-05-28T06:19:47.438Z",
+      "updated_at": "2022-05-28T07:38:13.039Z",
+      "id": 1
+    },
+    {
+      "title": "Post Edit",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n\n",
+      "status": 1,
+      "created_user_id": 1,
+      "updated_user_id": 1,
+      "created_at": "2022-05-28T06:21:18.876Z",
+      "updated_at": "2022-05-28T07:32:20.283Z",
+      "id": 2
+    },
+    {
+      "title": "Testing ",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n\n",
+      "status": 1,
+      "created_user_id": 1,
+      "updated_user_id": 1,
+      "created_at": "2022-05-28T07:30:26.060Z",
+      "updated_at": "2022-05-28T07:30:26.060Z",
+      "id": 3
+    },
+    {
       "title": "Title 1",
       "description": "About User",
       "created_user_id": "User 1",
@@ -119,6 +149,110 @@
       "description": "About User",
       "created_user_id": "User 20",
       "created_date": "1/5/2001"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "aat",
+      "email": "aat@gmail.com",
+      "password": "aat",
+      "type": 0,
+      "phone": "09780152981",
+      "address": "MawLaMyine",
+      "dob": "15/11/1998",
+      "create-user-id": 1,
+      "updated-user-id": 1,
+      "deleted-user-id": 1,
+      "created-at": "27/5/2022",
+      "updated-at": "27/5/2022",
+      "deleted-at": "27/5/2022",
+      "is-removed": false
+    },
+    {
+      "id": 2,
+      "name": "sso",
+      "email": "sso@gmail.com",
+      "password": "sso",
+      "type": 1,
+      "phone": "09780152981",
+      "address": "Monywa",
+      "dob": "15/11/1999",
+      "create-user-id": 2,
+      "updated-user-id": 2,
+      "deleted-user-id": 2,
+      "created-at": "27/5/2022",
+      "updated-at": "27/5/2022",
+      "deleted-at": "27/5/2022",
+      "is-removed": false
+    },
+    {
+      "id": 3,
+      "name": "amk",
+      "email": "amk@gmail.com",
+      "password": "amk",
+      "type": 1,
+      "phone": "09780152981",
+      "address": "ChaungSone",
+      "dob": "19/9/1999",
+      "create-user-id": 3,
+      "updated-user-id": 3,
+      "deleted-user-id": 3,
+      "created-at": "27/5/2022",
+      "updated-at": "27/5/2022",
+      "deleted-at": "27/5/2022",
+      "is-removed": false
+    },
+    {
+      "id": 4,
+      "name": "slm",
+      "email": "slm@gmail.com",
+      "password": "slm",
+      "type": 1,
+      "phone": "09780152981",
+      "address": "Bago",
+      "dob": "27/4/1999",
+      "create-user-id": 4,
+      "updated-user-id": 4,
+      "deleted-user-id": 4,
+      "created-at": "27/5/2022",
+      "updated-at": "27/5/2022",
+      "deleted-at": "27/5/2022",
+      "is-removed": false
+    },
+    {
+      "id": 5,
+      "name": "pep",
+      "email": "pep@gmail.com",
+      "password": "pep",
+      "type": 1,
+      "phone": "09780152981",
+      "address": "MawLaMyine",
+      "dob": "22/10/1998",
+      "create-user-id": 5,
+      "updated-user-id": 5,
+      "deleted-user-id": 5,
+      "created-at": "27/5/2022",
+      "updated-at": "27/5/2022",
+      "deleted-at": "27/5/2022",
+      "is-removed": false
+    },
+    {
+      "id": 6,
+      "name": "wp",
+      "email": "wp@gmail.com",
+      "password": "wp",
+      "type": 0,
+      "phone": "09780152981",
+      "address": "MawLaMyine",
+      "dob": "7/3/1999",
+      "create-user-id": 6,
+      "updated-user-id": 6,
+      "deleted-user-id": 6,
+      "created-at": "27/5/2022",
+      "updated-at": "27/5/2022",
+      "deleted-at": "27/5/2022",
+      "is-removed": false
     }
   ]
 }
