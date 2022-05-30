@@ -19,5 +19,13 @@
 
   table {
     width: 100%;
+
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      button {
+        margin: 2% 6%;
+      }
+    }
   }
 }

@@ -21,7 +21,7 @@ export interface PeriodicElement {
 export class PostListComponent implements OnInit {
   dataSource!: MatTableDataSource<PeriodicElement>;
   posts: any;
-  displayedColumns: string[] = ['title', 'description', 'created_user_id', 'created_date'];
+  displayedColumns: string[] = ['title', 'description', 'created_user_id', 'created_date', 'action'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private postSvc: PostService) { }
