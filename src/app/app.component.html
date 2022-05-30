@@ -1,1 +1,18 @@
+<mat-toolbar *ngIf="showNavBar">
+  <div class="nav">
+    <span class="title" [routerLink]="['/post-list']">SCM Bulletin Board</span>
+    <a *ngIf="user?.id && user?.type === 0" [routerLink]="['/users-list']">Users</a>
+    <a *ngIf="user?.id && user?.type === 1" [routerLink]="['/user-profile']">User</a>
+    <a [routerLink]="['/post-list']">Posts</a>
+    <span class="rt-nav">
+      <a *ngIf="user?.id" [routerLink]="['/user-profile']">{{user.name}}</a>
+      <a (click)="logout()">Logout</a>
+    </span>
+  </div>
+</mat-toolbar>
+<mat-toolbar *ngIf="!showNavBar">
+  <div class="nav">
+    <span class="title" [routerLink]="['/post-list']">SCM Bulletin Board</span>
+  </div>
+</mat-toolbar>
 <router-outlet></router-outlet>
