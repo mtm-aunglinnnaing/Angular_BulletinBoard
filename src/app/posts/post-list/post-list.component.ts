@@ -28,7 +28,7 @@ export class PostListComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.postSvc.getPost().subscribe((data) => {
+    this.postSvc.geAllPost().subscribe((data) => {
       console.log(data);
       this.posts = data;
       this.dataSource = new MatTableDataSource(this.posts);

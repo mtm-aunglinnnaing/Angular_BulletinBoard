@@ -10,7 +10,7 @@ export class PostService {
   apiUrl = 'http://localhost:3000';
   constructor(private http: HttpClient) { }
 
-  getPost(): Observable<any> {
+  geAllPost(): Observable<any> {
     const url = this.apiUrl + '/posts';
     return this.http.get(url);
   }
