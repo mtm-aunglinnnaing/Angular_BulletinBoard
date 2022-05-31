@@ -1,6 +1,6 @@
 .mat-elevation-z8 {
   width: 80%;
-  margin: 8% auto;
+  margin: 1% auto;
   padding: 2%;
 
   .filter {
@@ -19,6 +19,10 @@
 
   table {
     width: 100%;
+
+    th,td {
+      text-align: center !important;
+    }
 
     .btn-container {
       display: flex;
