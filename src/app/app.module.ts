@@ -11,8 +11,11 @@ import { AppComponent } from './app.component';
 import { PostCreateComponent } from './posts/post-create/post-create.component';
 import { PostConfirmComponent } from './posts/post-confirm/post-confirm.component';
 import { UserLoginComponent } from './users/user-login/user-login.component';
-import { IncorrectDialogComponent } from './components/incorrect-dialog/incorrect-dialog.component';
 import { PlainModalComponent } from './components/plain-modal/plain-modal.component';
+import { PostListComponent } from './posts/post-list/post-list.component';
+
+//services
+import { PostService } from './services/post.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,7 @@ import { PlainModalComponent } from './components/plain-modal/plain-modal.compon
     PostConfirmComponent,
     PlainModalComponent,
     UserLoginComponent,
-    IncorrectDialogComponent
+    PostListComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,7 @@ import { PlainModalComponent } from './components/plain-modal/plain-modal.compon
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [],
+  providers: [PostService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

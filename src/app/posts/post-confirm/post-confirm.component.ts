@@ -95,7 +95,7 @@ export class PostConfirmComponent implements OnInit {
         this.postSvc.updatePost(data, this.postId)
           .subscribe({
             next: result => {
-              this.router.navigate(['/post-confirm']);
+              this.router.navigate(['/post-list']);
             },
             error: err => {
               console.log('=== handle error ====')
@@ -115,6 +115,7 @@ export class PostConfirmComponent implements OnInit {
         };
         this.postSvc.createPost(data).subscribe({
           next: result => {
+            this.router.navigate(['/post-list']);
           },
           error: err => {
             console.log('=== handle error ====')
