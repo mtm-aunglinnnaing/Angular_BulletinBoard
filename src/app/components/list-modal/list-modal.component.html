@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>User Information</h2>
+<div mat-dialog-content>
+  <mat-list role="list">
+    <mat-list-item role="listitem">
+      <span>Name:</span> {{data.name}}
+    </mat-list-item>
+    <mat-list-item role="listitem">
+      <span>Email:</span> {{data.email}}
+    </mat-list-item>
+    <mat-list-item role="listitem">
+      <span>Phone:</span> {{data.phone}}
+    </mat-list-item>
+    <mat-list-item role="listitem">
+      <span>Birth Date:</span> {{data.dob}}
+    </mat-list-item>
+    <mat-list-item role="listitem">
+      <span>Address:</span> {{data.address}}
+    </mat-list-item>
+    <mat-list-item role="listitem">
+      <span>Created Date:</span> {{data.created_date | date: 'shortDate'}}
+    </mat-list-item>
+  </mat-list>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Close</button>
+</div>

@@ -1,0 +1,22 @@
+.user-container {
+  width: 80%;
+  margin: 30px auto;
+
+  .search-blk {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .btn-blk {
+      .btn-search {
+        margin-right: 30px;
+      }
+    }
+  }
+
+  .table-container {
+    .user-table {
+      width: 100%;
+    }
+  }
+}
