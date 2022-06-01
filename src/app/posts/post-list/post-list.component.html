@@ -35,20 +35,24 @@
     </ng-container>
 
     <!-- Created Date -->
-    <ng-container matColumnDef="created_date" class="created_date">
+    <ng-container matColumnDef="created_at" class="created_at">
       <th mat-header-cell *matHeaderCellDef> Posted Date </th>
-      <td mat-cell *matCellDef="let row"> {{row.created_date}} </td>
+      <td mat-cell *matCellDef="let row"> {{row.created_at | date: 'shortDate'}} </td>
     </ng-container>
 
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let row">
-        <div class="btn-container">
           <button mat-raised-button (click)="editPost()">Edit</button>
-          <button mat-raised-button color="warn" >Delete</button>
-        </div>
       </td>
     </ng-container>
+    <ng-container matColumnDef="action1">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-raised-button color="warn" (click)="deletePost(row.id)">Delete</button>
+      </td>
+    </ng-container>
+   
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

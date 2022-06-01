@@ -18,11 +18,15 @@ export class PostService {
     const url = this.apiUrl + '/posts';
     return this.http.get(url);
   }
-  deletePost(postId: number, data: any): Observable<any> {
+  deletePost(postId: any, data: any): Observable<any> {
     const url = this.apiUrl + '/posts/' + postId;
     return this.http.put(url, data);
   }
 
+  getPostDetail(postId: any): Observable<any> {
+    const url = this.apiUrl + '/posts/' + postId;
+    return this.http.get(url);
+  }
 
 
 
@@ -33,10 +37,7 @@ export class PostService {
     return this.http.get(url);
   }
   
-  getPostDetail(postId: number): Observable<any> {
-    const url = this.apiUrl + '/posts/' + postId;
-    return this.http.get(url);
-  }
+  
 
   async getListDetail(postId: number): Promise<object> {
     const url = this.apiUrl + '/posts/' + postId;

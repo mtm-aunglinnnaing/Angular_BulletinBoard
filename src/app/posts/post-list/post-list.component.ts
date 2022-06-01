@@ -7,12 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PostService } from 'src/app/services/post.service';
 
 
-export interface PeriodicElement {
-  name: string;
-  description: string;
-  created_user_id: number;
-  created_date: number;
-}
+
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
@@ -22,50 +17,68 @@ export interface PeriodicElement {
 export class PostListComponent implements OnInit {
 
   public postDetail: any = [];
+  public allUser: any = [];
+  public eachPost: any = [];
 
-  dataSource!: MatTableDataSource<PeriodicElement>;
-  posts: any;
-  displayedColumns: string[] = ['title', 'description', 'created_user_id', 'created_date', 'action'];
+  dataSource!: MatTableDataSource<any>;
+
+  displayedColumns: string[] = ['title', 'description', 'created_user_id', 'created_at', 'action', 'action1'];
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private postSvc: PostService, private router: Router,) { }
 
   ngOnInit(): void {
+    this.getPostData();
+  }
 
-    this.postSvc.getPost().subscribe((data: any) => {
-      console.log(data);
-      this.posts = data;
-      this.dataSource = new MatTableDataSource(this.posts);
-      this.dataSource.paginator = this.paginator;
+  getPostData() {
+    this.postSvc.getPost().subscribe({
+      next: posts => {
+        this.allUser = posts.filter((data: any) => {
+          return data.is_removed == false;
+        })
+        this.dataSource = new MatTableDataSource(this.allUser);
+        this.dataSource.paginator = this.paginator;
+      }
     })
   }
+
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim();
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
   }
-
   createPost() {
     this.router.navigate(['/post']);
   }
-
   editPost() {
     this.router.navigate(['/post/2'])
   }
 
-   postDelete = async (postId: number) => {
-    console.log(postId);
-    this.postDetail = await this.postSvc.getListDetail(postId);
-    console.log(this.postDetail)
-    const data = {
-      title: this.postDetail.title,
-      description: this.postDetail.description,
-      status: 1,
-      created_user_id: 1,
-      updated_user_id: 1,
-      created_at: new Date(),
-      updated_at: new Date()
-    };
+  deletePost(postId: any) {
+    this.postSvc.getPostDetail(postId).subscribe({
+      next: data => {
+        this.eachPost = data;
+      }
+    })
+    const param = {
+      "title": this.eachPost.title,
+      "description": this.eachPost.description,
+      "status": this.eachPost.status,
+      "created_user_id": this.eachPost.created_user_id,
+      "updated_user_id": this.eachPost.updated_user_id,
+      "created_at": this.eachPost.created_at,
+      "updated_at": this.eachPost.updated_at,
+      "is_removed": true,
+      "deleted_at": new Date()
+    }
+    this.postSvc.deletePost(postId, param).subscribe({
+      next: data => { 
+        this.getPostData();
+      }
+    })
+    
   }
 
 }
