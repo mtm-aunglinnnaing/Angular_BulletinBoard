@@ -16,6 +16,15 @@ export class UsersService {
     return this.http.get(url);
   }
 
+  getUserDetail(paramId: any): Observable<any> {
+    const url = this.apiUrl + '/users/' + paramId;
+    return this.http.get(url);
+  }
+
+  updateUser(data: any, userId: any): Observable<any> {
+    const url = this.apiUrl + '/users/' + userId;
+    return this.http.put(url, data);
+  }
 }
 
 

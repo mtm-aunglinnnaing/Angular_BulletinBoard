@@ -13,6 +13,7 @@ import { PostConfirmComponent } from './posts/post-confirm/post-confirm.componen
 import { UserLoginComponent } from './users/user-login/user-login.component';
 import { PlainModalComponent } from './components/plain-modal/plain-modal.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
+import { PasswordChangeComponent } from './users/password-change/password-change.component';
 
 //services
 import { PostService } from './services/post.service';
@@ -24,7 +25,8 @@ import { PostService } from './services/post.service';
     PostConfirmComponent,
     PlainModalComponent,
     UserLoginComponent,
-    PostListComponent
+    PostListComponent,
+    PasswordChangeComponent
   ],
   imports: [
     BrowserModule,
