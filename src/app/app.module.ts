@@ -13,9 +13,17 @@ import { PostConfirmComponent } from './posts/post-confirm/post-confirm.componen
 import { UserLoginComponent } from './users/user-login/user-login.component';
 import { PlainModalComponent } from './components/plain-modal/plain-modal.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
+import { UserCreateComponent } from './users/user-create/user-create.component';
+import { UserConfirmComponent } from './users/user-confirm/user-confirm.component';
+
 
 //services
 import { PostService } from './services/post.service';
+import { UsersService } from './services/users.service';
+
+//pippes
+import { PasswordPipe } from './pipes/password.pipe';
+import { UserTypePipe } from './pipes/user-type.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +32,11 @@ import { PostService } from './services/post.service';
     PostConfirmComponent,
     PlainModalComponent,
     UserLoginComponent,
-    PostListComponent
+    PostListComponent,
+    UserCreateComponent,
+    UserConfirmComponent,
+    PasswordPipe,
+    UserTypePipe
   ],
   imports: [
     BrowserModule,
@@ -35,7 +47,12 @@ import { PostService } from './services/post.service';
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [PostService],
+  providers: [
+    PostService,
+    UsersService,
+    PasswordPipe,
+    UserTypePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

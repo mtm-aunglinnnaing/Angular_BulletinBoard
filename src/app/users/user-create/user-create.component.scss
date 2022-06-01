@@ -1,0 +1,33 @@
+.user-container {
+
+  h2 {
+    margin: 30px 0 15px 0;
+    text-align: center;
+  }
+
+  .user-form {
+    width: 40%;
+    margin: 0 auto;
+    padding: 10px 15px;
+
+    .form-group {
+      display: block;
+      margin-bottom: 5px;
+
+      .description {
+        resize: none;
+      }
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: flex-end;
+
+      button {
+        margin-bottom: 20px;
+        margin-left: 15px;
+        padding: 0 40px;
+      }
+    }
+  }
+}

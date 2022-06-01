@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class SharingDataService {
 
   postData: any;
+  userData: any;
   constructor() { }
 
   setPostData(data: any) {
@@ -13,6 +14,15 @@ export class SharingDataService {
   }
 
   getPostData() {
-    return this.postData;
+    return this.userData;
   }
+
+  setUserData(data: any) {
+    this.userData = data;
+  }
+
+  getUserData() {
+    return this.userData;
+  }
+
 }

@@ -16,6 +16,16 @@ export class UsersService {
     return this.http.get(url);
   }
 
+  getUserDetail(userId: number): Observable<any> {
+    const url = this.apiUrl + '/users/' + userId;
+    return this.http.get(url);
+  }
+
+  createUser(data: any): Observable<any> {
+    const url = this.apiUrl + '/users';
+    return this.http.post(url, data);
+  }
+
 }
 
 
