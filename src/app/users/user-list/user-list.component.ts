@@ -1,5 +1,5 @@
 import { ViewChild, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
@@ -19,42 +19,38 @@ export class UserListComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'email', 'created_user_id', 'phone', 'dob', 'address', 'created_at', 'updated_at', 'action'];
   userList: any = [];
+  orgList: any = [];
   eachUser: any;
   dataSource!: MatTableDataSource<any>;
   userInfo: any;
-  //nameFilter = new FormControl();
-  //emailFilter = new FormControl();
-  //filteredValues = {
-  //  name: '', email: ''
-  //};
-  readonly formControl!: FormGroup;
+  nameFilter: any;
+  emailFilter: any;
+  fromDate: any;
+  toDate: any;
+
   constructor(
+    private router: Router,
     private usersSvc: UsersService,
-    private dialog: MatDialog,
-    formBuilder: FormBuilder
-  ) {
-    this.formControl = formBuilder.group({
-      name: '',
-      email: ''
-    });
+    private dialog: MatDialog) {
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   ngOnInit(): void {
     this.getUserData();
     this.userInfo = JSON.parse(localStorage.getItem('userInfo') || '[]');
-    this.onSearch();
   }
 
   getUserData() {
     this.usersSvc.getUser().subscribe({
       next: data => {
+        this.orgList = data.filter((result: any) => {
+          return result.is_removed === false;
+        })
         this.userList = data.filter((result: any) => {
           return result.is_removed === false;
         })
         this.dataSource = new MatTableDataSource(this.userList);
         this.dataSource.paginator = this.paginator;
-        console.log(this.userList);
       },
       error: err => {
         console.log('=== handle error ===');
@@ -121,39 +117,17 @@ export class UserListComponent implements OnInit {
     })
   }
 
-  //  onSearch() {
-  //    this.nameFilter.valueChanges.subscribe((nameFilterValue: any) => {
-  //      if (nameFilterValue) {
-  //        this.dataSource = this.userList
-  //          .filter((eachUser: any) => {
-  //            return eachUser.name.toLowerCase().indexOf(nameFilterValue.toLowerCase()) >= 0;
-  //          });
-  //      } else {
-  //        this.dataSource = this.userList;
-  //      }
-  //    });
-  //
-  //    this.emailFilter.valueChanges.subscribe((emailFilterValue: any) => {
-  //      if (emailFilterValue) {
-  //        this.dataSource = this.userList
-  //          .filter((eachUser: any) => {
-  //            return eachUser.email.toLowerCase().indexOf(emailFilterValue.toLowerCase()) >= 0;
-  //          });
-  //      } else {
-  //        this.dataSource = this.userList;
-  //      }
-  //    });
-  //  }
-
   onSearch() {
-    this.dataSource.filterPredicate = ((data: any, filter: any) => {
-      const a = !filter.name || data.name.toLowerCase().includes(filter.name);
-      const b = !filter.email || data.email.toLowerCase().includes(filter.email);
-      return a && b;
-    })
-    this.formControl.valueChanges.subscribe(value => {
-      const filter = { ...value, name: value.name.trim().toLowerCase() } as string;
-      this.dataSource.filter = filter;
+    let result = this.orgList.filter((e: any) => {
+      return e.name.includes(this.nameFilter)
+        || e.email.includes(this.emailFilter)
+        || new Date(e.created_at) >= this.fromDate
+        && new Date(e.created_at) <= this.toDate
     });
+    this.dataSource = result;
+  }
+
+  onClickUserCreate() {
+    this.router.navigate(['/user']);
   }
 }
