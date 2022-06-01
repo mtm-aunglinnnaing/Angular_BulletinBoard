@@ -10,12 +10,12 @@ import { MustMatch } from 'src/app/validators/must-match.validator';
   styleUrls: ['./user-create.component.scss']
 })
 export class UserCreateComponent implements OnInit {
-  
+
   value!: number;
   label!: string;
   typeOption = [
-    {  value: 0, label: 'Admin' },
-    {  value: 1, label: 'User' }
+    { value: 0, label: 'Admin' },
+    { value: 1, label: 'User' }
   ];
   userForm!: FormGroup;
   public userId: number = 0;
@@ -37,7 +37,7 @@ export class UserCreateComponent implements OnInit {
     this.userForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
-      password: ['', [Validators.required,Validators.pattern('(?=.*[A-Z])(?=.*\d)[A-Za-z\d].{8,}$')]],
+      password: ['', [Validators.required]],
       confirmPwd: ['', [Validators.required, MustMatch]],
       type: [0],
       phone: ['', Validators.required],
@@ -47,21 +47,20 @@ export class UserCreateComponent implements OnInit {
       {
         validator: MustMatch('password', 'confirmPwd')
       });
-      if (this.existingUser) {
-        this.isEditUser = true;
-        this.userForm.patchValue({
-          id: this.existingUser.id,
-          name: this.existingUser.name,
-          email: this.existingUser.email,
-          password: this.existingUser.password,
-          confirmPwd: this.existingUser.confirmPwd,
-          type: this.existingUser.type,
-          phone: this.existingUser.phone,
-          dob: this.existingUser.dob,
-          address: this.existingUser.address,
-        });
-      }
-      this.getUserData();
+    if (this.existingUser) {
+      this.userForm.patchValue({
+        id: this.existingUser.id,
+        name: this.existingUser.name,
+        email: this.existingUser.email,
+        password: this.existingUser.password,
+        confirmPwd: this.existingUser.confirmPwd,
+        type: this.existingUser.type,
+        phone: this.existingUser.phone,
+        dob: this.existingUser.dob,
+        address: this.existingUser.address,
+      });
+    }
+    this.getUserData();
   }
 
   getUserData() {
@@ -96,7 +95,6 @@ export class UserCreateComponent implements OnInit {
       phone: this.userForm.value.phone,
       dob: this.userForm.value.dob,
       address: this.userForm.value.address,
-      
     });
     this.router.navigate(['/user-confirm']);
   }

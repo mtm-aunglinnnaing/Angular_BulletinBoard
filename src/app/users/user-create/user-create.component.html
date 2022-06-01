@@ -1,36 +1,36 @@
 <div class="user-container">
-  <h2>Create User</h2>
+  <h2 *ngIf="!userId">Create User</h2>
+  <h2 *ngIf="userId">Update User</h2>
   <form [formGroup]="userForm" (ngSubmit)="confirmUser()" class="user-form">
-    <!-- Name -->
-    <mat-form-field appearance="standard" class="form-group">
+
+    <mat-form-field class="form-group">
       <mat-label>Name</mat-label>
       <input matInput type="text" formControlName="name" placeholder="Name">
       <mat-error *ngIf="myForm['name'].hasError('required')">Name is required</mat-error>
     </mat-form-field>
-    <!-- /Name -->
 
-    <mat-form-field appearance="standard" class="form-group">
+    <mat-form-field class="form-group">
       <mat-label>Email Address</mat-label>
       <input matInput type="email" formControlName="email" placeholder="Email Address">
       <mat-error *ngIf="myForm['email'].hasError('required')">Email address is required</mat-error>
       <mat-error *ngIf="myForm['email'].hasError('pattern')">Please enter a valid email</mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="standard" class="form-group">
+    <mat-form-field class="form-group" *ngIf="!userId">
       <mat-label>Password</mat-label>
       <input matInput type="password" formControlName="password" placeholder="Password">
       <mat-error *ngIf="myForm['password'].hasError('required')">Password is required</mat-error>
       <mat-error *ngIf="!myForm['password'].hasError('required') && myForm['password'].hasError('pattern')">Password must be more than 8characters long,must contain at least 1uppercase and 1numeric.</mat-error>
     </mat-form-field>
 
-    <mat-form-field  class="form-group">
+    <mat-form-field class="form-group" *ngIf="!userId">
       <mat-label>Confirm Password</mat-label>
       <input matInput type="password" formControlName="confirmPwd">
       <mat-error *ngIf="myForm['confirmPwd'].hasError('required')">Confirm password is required</mat-error>
       <mat-error *ngIf="myForm['confirmPwd'].hasError('mustMatch')">Password must be match</mat-error>
     </mat-form-field>
 
-    <mat-form-field  class="form-group">
+    <mat-form-field class="form-group">
       <mat-label>Type</mat-label>
       <mat-select matNativeControl name="type" formControlName="type" required>
         <mat-option *ngFor="let selectOption of typeOption" [value]="selectOption.value"> {{selectOption.label}}</mat-option>
@@ -45,7 +45,7 @@
 
     <mat-form-field class="form-group">
       <mat-label>Date Of Birth</mat-label>
-      <input matInput [matDatepicker]="picker1" formControlName="dob" >
+      <input matInput [matDatepicker]="picker1" formControlName="dob">
       <mat-hint>DD/MM/YYYY</mat-hint>
       <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
       <mat-datepicker #picker1></mat-datepicker>
@@ -55,6 +55,10 @@
       <mat-label>Address</mat-label>
       <textarea matInput formControlName="address"></textarea>
     </mat-form-field>
+
+    <div class="changePwd">
+      <a [routerLink]="['/user-create']">Change Password</a>
+    </div>
 
     <div class="button-group">
       <button mat-flat-button type="submit" [disabled]="!userForm.valid" color="primary" class="btn-submit">Confirm</button>

@@ -1,5 +1,6 @@
 <div class="user-confirm">
   <h2 *ngIf="!userId" class="title">Create User Confirmation</h2>
+  <h2 *ngIf="userId" class="title">Update User Confirmation</h2>
   <table class="confirm-table">
     <tr>
       <td class="sub-ttl">Name</td>
@@ -9,7 +10,7 @@
       <td class="sub-ttl">Email</td>
       <td>{{userData.email}}</td>
     </tr>
-    <tr>
+    <tr *ngIf="!userId">
       <td class="sub-ttl">Password</td>
       <td>{{ userData.password | password : userData.password }}</td>
     </tr>
@@ -28,10 +29,11 @@
     <tr>
       <td class="sub-ttl">Address</td>
       <td>{{userData.address}}</td>
-    </tr>   
+    </tr>
   </table>
   <div class="button-group">
     <button mat-flat-button *ngIf="!userData.userId" (click)="createUser()" color="primary">Create</button>
+    <button mat-flat-button *ngIf="userData.userId" (click)="createUser()" color="primary">Update</button>
     <button mat-stroked-button (click)="goBackUserCreate()" color="warn">Cancel</button>
   </div>
 </div>

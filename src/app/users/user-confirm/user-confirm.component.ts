@@ -32,6 +32,9 @@ export class UserConfirmComponent implements OnInit {
     this.userData = this.shareDataSvc.getUserData();
     this.userId = this.userData.userId;
     this.getUserList();
+    if (this.userId) {
+      this.getEachUser();
+    }
     this.userInfo = JSON.parse(localStorage.getItem('userInfo') || "[]");
   }
 
@@ -39,6 +42,18 @@ export class UserConfirmComponent implements OnInit {
     this.userSvc.getUser().subscribe({
       next: result => {
         this.userList = result;
+      },
+      error: err => {
+        console.log('=== handle error ====')
+        console.log(err)
+      }
+    });
+  }
+
+  getEachUser() {
+    this.userSvc.getUserDetail(this.userId).subscribe({
+      next: result => {
+        this.userListDetail = result;
       },
       error: err => {
         console.log('=== handle error ====')
@@ -59,7 +74,33 @@ export class UserConfirmComponent implements OnInit {
         }
       });
     } else {
-      if (!this.userId) {
+      if (this.userId) {
+        const data = {
+          name: this.userData.name,
+          email: this.userData.email,
+          type: this.userData.type,
+          phone: this.userData.phone,
+          dob: this.userData.dob,
+          address: this.userData.address,
+          created_user_id: this.userListDetail.created_user_id,
+          updated_user_id: this.userInfo.id,
+          deleted_user_id: this.userInfo.id,
+          created_at: this.userListDetail.created_at,
+          updated_at: new Date(),
+          is_removed: 'false'
+        };
+        this.userSvc.updateUser(data, this.userId)
+          .subscribe({
+            next: result => {
+              this.router.navigate(['/user-list']);
+            },
+            error: err => {
+              console.log('=== handle error ====')
+              console.log(err)
+            }
+          });
+        this.snackBar.open('User Updated Successfully!', '', { duration: 3000 });
+      } else {
         const data = {
           name: this.userData.name,
           email: this.userData.email,
@@ -74,10 +115,11 @@ export class UserConfirmComponent implements OnInit {
           deleted_user_id: this.userInfo.id,
           created_at: new Date(),
           updated_at: new Date(),
-          is_removed:'false'
+          is_removed: 'false'
         };
         this.userSvc.createUser(data).subscribe({
           next: result => {
+            this.router.navigate(['/user-list']);
           },
           error: err => {
             console.log('=== handle error ====')
@@ -85,13 +127,17 @@ export class UserConfirmComponent implements OnInit {
           }
         });
         this.snackBar.open('User Created Successfully!', '', { duration: 3000 });
-        this.router.navigate(['/user-list']);
       }
     }
   }
 
-    goBackUserCreate(){
+  goBackUserCreate() {
+    if (this.userId) {
+      this.router.navigate(['/user/' + this.userId]);
+    }
+    else {
       this.router.navigate(['/user']);
     }
+  }
 
 }

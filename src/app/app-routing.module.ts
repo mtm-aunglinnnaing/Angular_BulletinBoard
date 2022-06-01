@@ -27,7 +27,8 @@ const routes: Routes = [
   { path: 'post/:id', component: PostCreateComponent, resolve: { post: PostResolver }, canActivate: [AuthGuard] },
   { path: 'post-confirm', component: PostConfirmComponent },
   { path: 'user', component: UserCreateComponent },
-  { path: 'user-confirm',component:UserConfirmComponent}
+  { path: 'user/:id', component: UserCreateComponent, resolve: { user: UserResolver } },
+  { path: 'user-confirm', component: UserConfirmComponent }
 ];
 
 @NgModule({
