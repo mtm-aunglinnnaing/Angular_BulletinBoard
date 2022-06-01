@@ -40,7 +40,8 @@ import { MatTabsModule } from '@angular/material/tabs'
     MatRadioModule,
     MatSelectModule,
     MatPaginatorModule,
-    MatTabsModule
+    MatTabsModule,
+    MatDialogModule,
   ]
 })
 export class AngularMaterialModule { }

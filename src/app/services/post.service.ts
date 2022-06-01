@@ -10,10 +10,23 @@ export class PostService {
   apiUrl = 'http://localhost:3000';
   constructor(private http: HttpClient) { }
 
+
+
+
+
   getPost(): Observable<any> {
     const url = this.apiUrl + '/posts';
     return this.http.get(url);
   }
+  deletePost(postId: number, data: any): Observable<any> {
+    const url = this.apiUrl + '/posts/' + postId;
+    return this.http.put(url, data);
+  }
+
+
+
+
+
 
   geAllPost(): Observable<any> {
     const url = this.apiUrl + '/posts';

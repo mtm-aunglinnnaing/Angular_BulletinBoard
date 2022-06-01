@@ -45,9 +45,14 @@ export class PostListComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-  postCreate() {
+  createPost() {
     this.router.navigate(['/post']);
   }
+
+  editPost() {
+    this.router.navigate(['/post/2'])
+  }
+
    postDelete = async (postId: number) => {
     console.log(postId);
     this.postDetail = await this.postSvc.getListDetail(postId);
