@@ -9,7 +9,6 @@ import { PostListComponent } from './posts/post-list/post-list.component';
 import { UserCreateComponent } from './users/user-create/user-create.component';
 import { UserConfirmComponent } from './users/user-confirm/user-confirm.component';
 
-
 //resolver
 import { PostResolver } from './resolver/post.resolver';
 import { UserResolver } from './resolver/user.resolver';
@@ -17,18 +16,16 @@ import { UserResolver } from './resolver/user.resolver';
 //guard
 import { AuthGuard } from './guards/auth.guard';
 
-
-
 const routes: Routes = [
   { path: '', component: UserLoginComponent },
   { path: 'login', component: UserLoginComponent },
   { path: 'post-list', component: PostListComponent },
   { path: 'post', component: PostCreateComponent, canActivate: [AuthGuard] },
   { path: 'post/:id', component: PostCreateComponent, resolve: { post: PostResolver }, canActivate: [AuthGuard] },
-  { path: 'post-confirm', component: PostConfirmComponent },
-  { path: 'user', component: UserCreateComponent },
-  { path: 'user/:id', component: UserCreateComponent, resolve: { user: UserResolver } },
-  { path: 'user-confirm', component: UserConfirmComponent }
+  { path: 'post-confirm', component: PostConfirmComponent, canActivate: [AuthGuard] },
+  { path: 'user', component: UserCreateComponent, canActivate: [AuthGuard]  },
+  { path: 'user/:id', component: UserCreateComponent, resolve: { user: UserResolver }, canActivate: [AuthGuard]  },
+  { path: 'user-confirm', component: UserConfirmComponent, canActivate: [AuthGuard]  }
 ];
 
 @NgModule({

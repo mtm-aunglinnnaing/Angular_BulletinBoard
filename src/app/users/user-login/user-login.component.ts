@@ -62,8 +62,6 @@ export class UserLoginComponent implements OnInit {
         });
       }
     });
-      //to check user is loggedIn 
-    this.postSvc.login(this.loginForm.value);
   }
 
 }
