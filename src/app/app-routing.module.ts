@@ -11,13 +11,16 @@ import { UserListComponent } from './users/user-list/user-list.component';
 //resolver
 import { PostResolver } from './resolver/post.resolver';
 
+//guard
+import { AuthGuard } from './guards/auth.guard';
+
 const routes: Routes = [
   { path: '', component: UserLoginComponent },
   { path: 'login', component: UserLoginComponent },
   { path: 'post-list', component: PostListComponent },
-  { path: 'post', component: PostCreateComponent },
-  { path: 'post/:id', component: PostCreateComponent, resolve: { post: PostResolver } },
-  { path: 'post-confirm', component: PostConfirmComponent },
+  { path: 'post', component: PostCreateComponent, canActivate: [AuthGuard] },
+  { path: 'post/:id', component: PostCreateComponent, resolve: { post: PostResolver }, canActivate: [AuthGuard] },
+  { path: 'post-confirm', component: PostConfirmComponent, canActivate: [AuthGuard] },
   { path: 'user-list', component: UserListComponent }
 ];
 

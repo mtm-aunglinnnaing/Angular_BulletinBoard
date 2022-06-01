@@ -21,6 +21,7 @@ export class PostConfirmComponent implements OnInit {
   public postList: any;
   public postListDetail: any;
   public postId: any;
+  public userInfo: any;
   public existingPost: any;
   public isChecked: boolean = true;
   constructor(
@@ -42,6 +43,7 @@ export class PostConfirmComponent implements OnInit {
     if (this.postId) {
       this.getEachPost();
     }
+    this.userInfo = JSON.parse(localStorage.getItem('userInfo') || "[]");
   }
 
   getPostList() {
@@ -86,40 +88,41 @@ export class PostConfirmComponent implements OnInit {
           description: this.postData.description,
           status: this.postData.status,
           created_user_id: this.postListDetail.created_user_id,
-          updated_user_id: 1,
+          updated_user_id: this.userInfo.id,
           created_at: this.postListDetail.created_at,
           updated_at: new Date()
         };
         this.postSvc.updatePost(data, this.postId)
           .subscribe({
             next: result => {
-              this.router.navigate(['/post-confirm']);
+              this.router.navigate(['/post-list']);
             },
             error: err => {
               console.log('=== handle error ====')
               console.log(err)
             }
           });
-        this.snackBar.open('Post Updated Successfully!', 'Dismiss  ');
+        this.snackBar.open('Post Updated Successfully!', '', { duration: 3000 });
       } else {
         const data = {
           title: this.postData.title,
           description: this.postData.description,
           status: 1,
-          created_user_id: 1,
-          updated_user_id: 1,
+          created_user_id: this.userInfo.id,
+          updated_user_id: this.userInfo.id,
           created_at: new Date(),
           updated_at: new Date()
         };
         this.postSvc.createPost(data).subscribe({
           next: result => {
+            this.router.navigate(['/post-list']);
           },
           error: err => {
             console.log('=== handle error ====')
             console.log(err)
           }
         });
-        this.snackBar.open('Post Created Successfully!', 'Dismiss');
+        this.snackBar.open('Post Created Successfully!', '', { duration: 3000 });
       }
     }
   }

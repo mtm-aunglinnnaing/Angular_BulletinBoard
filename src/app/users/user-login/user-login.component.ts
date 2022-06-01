@@ -5,6 +5,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { UsersService } from 'src/app/services/users.service';
 import { PlainModalComponent } from 'src/app/components/plain-modal/plain-modal.component';
 
+//services
+import { PostService } from 'src/app/services/post.service';
+
 @Component({
   selector: 'app-user-login',
   templateUrl: './user-login.component.html',
@@ -17,6 +20,7 @@ export class UserLoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private usersSvc: UsersService,
+    private postSvc: PostService,
     private router: Router,
     public dialog: MatDialog
   ) { }
@@ -57,7 +61,6 @@ export class UserLoginComponent implements OnInit {
           }
         });
       }
-
     });
   }
 

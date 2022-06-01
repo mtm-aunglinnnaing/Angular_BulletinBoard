@@ -29,5 +29,4 @@ export class PostService {
     const url = this.apiUrl + '/posts/' + postId;
     return this.http.put(url, data);
   }
-
 }
