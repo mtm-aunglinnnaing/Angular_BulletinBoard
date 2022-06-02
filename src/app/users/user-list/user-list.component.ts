@@ -121,7 +121,7 @@ export class UserListComponent implements OnInit {
     if (this.nameFilter && !this.emailFilter && !this.fromDate && !this.toDate) {
       //for name filter
       let result = this.orgList.filter((e: any) => {
-        return e.name.includes(this.nameFilter);
+        return e.name.trim().toLowerCase().includes(this.nameFilter);
       });
       this.dataSource = result;
     } else if (!this.nameFilter && this.emailFilter && !this.fromDate && !this.toDate) {
@@ -140,14 +140,14 @@ export class UserListComponent implements OnInit {
     } else if (this.nameFilter && this.emailFilter && !this.fromDate && !this.toDate) {
       //for name and email filter
       let result = this.orgList.filter((e: any) => {
-        return e.name.includes(this.nameFilter) && e.email.includes(this.emailFilter);;
+        return e.name.trim().toLowerCase().includes(this.nameFilter) && e.email.includes(this.emailFilter);
       });
       this.dataSource = result;
     }
     else if (this.nameFilter && !this.emailFilter && this.fromDate && this.toDate) {
       //for name and date filter
       let result = this.orgList.filter((e: any) => {
-        return e.name.includes(this.nameFilter) && new Date(e.created_at) >= this.fromDate && new Date(e.created_at) <= this.toDate;
+        return e.name.trim().toLowerCase().includes(this.nameFilter) && new Date(e.created_at) >= this.fromDate && new Date(e.created_at) <= this.toDate;
       });
       this.dataSource = result;
     }
@@ -161,7 +161,7 @@ export class UserListComponent implements OnInit {
     else {
       //for name , email and date filter
       let result = this.orgList.filter((e: any) => {
-        return e.name.includes(this.nameFilter)
+        return e.name.trim().toLowerCase().includes(this.nameFilter)
           && e.email.includes(this.emailFilter)
           && new Date(e.created_at) >= this.fromDate
           && new Date(e.created_at) <= this.toDate
