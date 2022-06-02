@@ -118,13 +118,56 @@ export class UserListComponent implements OnInit {
   }
 
   onSearch() {
-    let result = this.orgList.filter((e: any) => {
-      return e.name.includes(this.nameFilter)
-        || e.email.includes(this.emailFilter)
-        || new Date(e.created_at) >= this.fromDate
-        && new Date(e.created_at) <= this.toDate
-    });
-    this.dataSource = result;
+    if (this.nameFilter && !this.emailFilter && !this.fromDate && !this.toDate) {
+      //for name filter
+      let result = this.orgList.filter((e: any) => {
+        return e.name.includes(this.nameFilter);
+      });
+      this.dataSource = result;
+    } else if (!this.nameFilter && this.emailFilter && !this.fromDate && !this.toDate) {
+      //for email filter
+      let result = this.orgList.filter((e: any) => {
+        return e.email.includes(this.emailFilter);
+      });
+      this.dataSource = result;
+    }
+    else if (!this.nameFilter && !this.emailFilter && this.fromDate && this.toDate) {
+      //for date filter
+      let result = this.orgList.filter((e: any) => {
+        return new Date(e.created_at) >= this.fromDate && new Date(e.created_at) <= this.toDate
+      });
+      this.dataSource = result;
+    } else if (this.nameFilter && this.emailFilter && !this.fromDate && !this.toDate) {
+      //for name and email filter
+      let result = this.orgList.filter((e: any) => {
+        return e.name.includes(this.nameFilter) && e.email.includes(this.emailFilter);;
+      });
+      this.dataSource = result;
+    }
+    else if (this.nameFilter && !this.emailFilter && this.fromDate && this.toDate) {
+      //for name and date filter
+      let result = this.orgList.filter((e: any) => {
+        return e.name.includes(this.nameFilter) && new Date(e.created_at) >= this.fromDate && new Date(e.created_at) <= this.toDate;
+      });
+      this.dataSource = result;
+    }
+    else if (!this.nameFilter && this.emailFilter && this.fromDate && this.toDate) {
+      //for email and date filter
+      let result = this.orgList.filter((e: any) => {
+        return e.email.includes(this.emailFilter) && new Date(e.created_at) >= this.fromDate && new Date(e.created_at) <= this.toDate;
+      });
+      this.dataSource = result;
+    }
+    else {
+      //for name , email and date filter
+      let result = this.orgList.filter((e: any) => {
+        return e.name.includes(this.nameFilter)
+          && e.email.includes(this.emailFilter)
+          && new Date(e.created_at) >= this.fromDate
+          && new Date(e.created_at) <= this.toDate
+      });
+      this.dataSource = result;
+    }
   }
 
   onClickUserCreate() {
