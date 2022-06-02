@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 //services
 import { PostService } from 'src/app/services/post.service';
+import { UsersService } from 'src/app/services/users.service';
 
 
 
@@ -17,7 +18,7 @@ import { PostService } from 'src/app/services/post.service';
 export class PostListComponent implements OnInit {
 
   public postDetail: any = [];
-  public allUser: any = [];
+  public allPost: any = [];
   public eachPost: any = [];
 
   dataSource!: MatTableDataSource<any>;
@@ -26,7 +27,7 @@ export class PostListComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private postSvc: PostService, private router: Router,) { }
+  constructor(private postSvc: PostService, private usersSvc: UsersService, private router: Router,) { }
 
   ngOnInit(): void {
     this.getPostData();
@@ -35,13 +36,27 @@ export class PostListComponent implements OnInit {
   getPostData() {
     this.postSvc.getPost().subscribe({
       next: posts => {
-        this.allUser = posts.filter((data: any) => {
+        this.allPost = posts.filter((data: any) => {
           return data.is_removed == false;
-        })
-        this.dataSource = new MatTableDataSource(this.allUser);
+        });
+        this.dataSource = new MatTableDataSource(this.allPost);
         this.dataSource.paginator = this.paginator;
       }
-    })
+    });
+  }
+
+  login() {
+    this.usersSvc.getUser().subscribe(res => {
+      console.log(res)
+      const user = res(() => {
+        
+      });
+        if (user.type === 0) {
+          this.router.navigate(["/post-confirm"]);
+        } else {
+        this.router.navigate(["/post-list"]);
+      }
+    });
   }
 
   applyFilter(filterValue: string) {
@@ -52,8 +67,8 @@ export class PostListComponent implements OnInit {
   createPost() {
     this.router.navigate(['/post']);
   }
-  editPost() {
-    this.router.navigate(['/post/2'])
+  editPost(postId: number) {
+    this.router.navigate(['/post/'+ postId])
   }
 
   deletePost(postId: any) {
@@ -69,7 +84,6 @@ export class PostListComponent implements OnInit {
       "created_user_id": this.eachPost.created_user_id,
       "updated_user_id": this.eachPost.updated_user_id,
       "created_at": this.eachPost.created_at,
-      "updated_at": this.eachPost.updated_at,
       "is_removed": true,
       "deleted_at": new Date()
     }

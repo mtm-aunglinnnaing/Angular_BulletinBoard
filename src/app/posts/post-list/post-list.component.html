@@ -3,7 +3,7 @@
 <div class="mat-elevation-z8">
   <div class="filter">
     <mat-form-field apperance="standard">
-      <mat-label>Search User</mat-label>
+      <mat-label>Search Post</mat-label>
       <input matInput placeholder="Search" type="text" #input>
     </mat-form-field>
     <div class="opr-btn">
@@ -43,7 +43,7 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let row">
-          <button mat-raised-button (click)="editPost()">Edit</button>
+          <button mat-raised-button (click)="editPost(row.id)">Edit</button>
       </td>
     </ng-container>
     <ng-container matColumnDef="action1">
