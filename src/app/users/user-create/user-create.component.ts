@@ -23,6 +23,7 @@ export class UserCreateComponent implements OnInit {
   public existingUser: any;
   public isEditUser: boolean = true;
   public currentdate = new Date();
+  NUMBER_OF_DIGITS = 11;
 
   constructor(
     private fb: FormBuilder,
@@ -37,10 +38,14 @@ export class UserCreateComponent implements OnInit {
     this.userForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
-      password: ['',[Validators.required,Validators.pattern('(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]{8,}$')]],
+      password: ['', [
+        Validators.required,
+        Validators.pattern('(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]{8,}$')]],
       confirmPwd: ['', [Validators.required, MustMatch]],
       type: [0],
-      phone: ['', Validators.required],
+      phone: ['', [Validators.required,
+      Validators.pattern("^[0-9]{11}$")
+      ]],
       dob: [this.currentdate],
       address: ['']
     },
@@ -82,6 +87,14 @@ export class UserCreateComponent implements OnInit {
 
   get myForm() {
     return this.userForm.controls;
+  }
+
+  keyPress(event: any) {
+    const pattern = /[0-9\+\-\ ]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
   }
 
   confirmUser() {

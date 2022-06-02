@@ -39,8 +39,10 @@
 
     <mat-form-field class="form-group">
       <mat-label>Phone</mat-label>
-      <input matInput type="text" formControlName="phone" placeholder="Phone">
+      <input matInput type="text" (keypress)="keyPress($event)" formControlName="phone" placeholder="Phone">
       <mat-error *ngIf="myForm['phone'].hasError('required')">Phone is required</mat-error>
+      <mat-error *ngIf="!myForm['phone'].hasError('required') && myForm['phone'].hasError('pattern')">
+        Phone number must be start with 09 and 11 digits</mat-error>
     </mat-form-field>
 
     <mat-form-field class="form-group">
@@ -56,7 +58,7 @@
       <textarea matInput formControlName="address"></textarea>
     </mat-form-field>
 
-    <div class="changePwd">
+    <div class="changePwd" *ngIf="userId">
       <a [routerLink]="['/user-create']">Change Password</a>
     </div>
 
