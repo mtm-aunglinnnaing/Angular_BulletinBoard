@@ -22,7 +22,6 @@ export class PostListComponent implements OnInit {
   public eachPost: any = [];
 
   dataSource!: MatTableDataSource<any>;
-
   displayedColumns: string[] = ['title', 'description', 'created_user_id', 'created_at', 'action', 'action1'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -41,20 +40,6 @@ export class PostListComponent implements OnInit {
         });
         this.dataSource = new MatTableDataSource(this.allPost);
         this.dataSource.paginator = this.paginator;
-      }
-    });
-  }
-
-  login() {
-    this.usersSvc.getUser().subscribe(res => {
-      console.log(res)
-      const user = res(() => {
-        
-      });
-        if (user.type === 0) {
-          this.router.navigate(["/post-confirm"]);
-        } else {
-        this.router.navigate(["/post-list"]);
       }
     });
   }
