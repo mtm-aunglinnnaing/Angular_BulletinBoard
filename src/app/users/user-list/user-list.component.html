@@ -62,7 +62,7 @@
       <!-- DOB Column -->
       <ng-container matColumnDef="dob">
         <th mat-header-cell *matHeaderCellDef> Birth Date </th>
-        <td mat-cell *matCellDef="let user"> {{user.dob}} </td>
+        <td mat-cell *matCellDef="let user"> {{user.dob | date: 'shortDate'}} </td>
       </ng-container>
 
       <!-- Address Column -->

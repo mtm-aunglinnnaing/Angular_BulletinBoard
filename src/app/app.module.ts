@@ -15,6 +15,7 @@ import { PlainModalComponent } from './components/plain-modal/plain-modal.compon
 import { PostListComponent } from './posts/post-list/post-list.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { ListModalComponent } from './components/list-modal/list-modal.component';
+import { UserProfileComponent } from './users/user-profile/user-profile.component';
 
 //services
 import { PostService } from './services/post.service';
@@ -28,7 +29,8 @@ import { PostService } from './services/post.service';
     UserLoginComponent,
     PostListComponent,
     UserListComponent,
-    ListModalComponent
+    ListModalComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
