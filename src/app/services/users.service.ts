@@ -30,6 +30,7 @@ export class UsersService {
     const url = this.apiUrl + '/users/' + userId;
     return this.http.put(url, data);
   } 
+  
   deleteUser(paramId: number, data: any): Observable<any> {
     const url = this.apiUrl + '/users/' + paramId;
     return this.http.put(url, data);

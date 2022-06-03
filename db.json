@@ -391,21 +391,21 @@
       "is_removed": false
     },
     {
-      "id": 15,
       "name": "User 15",
       "email": "user15@gmail.com",
-      "password": "user15",
-      "type": 1,
-      "phone": "09780152981",
-      "address": "ChaungSone",
-      "dob": "19/9/1999",
-      "created_user_id": 4,
-      "updated_user_id": 4,
-      "deleted_user_id": 4,
-      "created_at": "2022-05-30T23:51:09.273Z",
-      "updated_at": "2022-05-30T23:51:09.273Z",
-      "deleted_at": "",
-      "is_removed": false
+      "password": "User1234",
+      "confirmPwd": "User1234",
+      "type": 0,
+      "phone": "09789152981",
+      "dob": "2022-06-02T07:00:00.000Z",
+      "address": "MLM",
+      "created_user_id": 12,
+      "updated_user_id": 12,
+      "deleted_user_id": 12,
+      "created_at": "2022-06-03T16:13:32.653Z",
+      "updated_at": "2022-06-03T16:13:32.653Z",
+      "is_removed": "false",
+      "id": 15
     }
   ]
 }

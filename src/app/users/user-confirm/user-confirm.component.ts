@@ -14,10 +14,8 @@ import { UsersService } from 'src/app/services/users.service';
 export class UserConfirmComponent implements OnInit {
 
   public userData: any;
-  public userList: any;
+  public userList: any = [];
   public userListDetail: any;
-  public userId: any;
-  public existingUser: any;
   public userInfo: any;
 
   constructor(
@@ -25,16 +23,12 @@ export class UserConfirmComponent implements OnInit {
     private shareDataSvc: SharingDataService,
     private userSvc: UsersService,
     private snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
     this.userData = this.shareDataSvc.getUserData();
-    this.userId = this.userData.userId;
     this.getUserList();
-    if (this.userId) {
-      this.getEachUser();
-    }
     this.userInfo = JSON.parse(localStorage.getItem('userInfo') || "[]");
   }
 
@@ -50,21 +44,9 @@ export class UserConfirmComponent implements OnInit {
     });
   }
 
-  getEachUser() {
-    this.userSvc.getUserDetail(this.userId).subscribe({
-      next: result => {
-        this.userListDetail = result;
-      },
-      error: err => {
-        console.log('=== handle error ====')
-        console.log(err)
-      }
-    });
-  }
-
   createUser() {
-    const duplicateUser = this.userList.filter((item: any) => item.email === this.userData.email);
 
+    const duplicateUser = this.userList.filter((item: any) => item.email === this.userData.email);
     if (duplicateUser.length > 0) {
       this.dialog.open(PlainModalComponent, {
         data: {
@@ -74,70 +56,39 @@ export class UserConfirmComponent implements OnInit {
         }
       });
     } else {
-      if (this.userId) {
-        const data = {
-          name: this.userData.name,
-          email: this.userData.email,
-          type: this.userData.type,
-          phone: this.userData.phone,
-          dob: this.userData.dob,
-          address: this.userData.address,
-          created_user_id: this.userListDetail.created_user_id,
-          updated_user_id: this.userInfo.id,
-          deleted_user_id: this.userInfo.id,
-          created_at: this.userListDetail.created_at,
-          updated_at: new Date(),
-          is_removed: 'false'
-        };
-        this.userSvc.updateUser(data, this.userId)
-          .subscribe({
-            next: result => {
-              this.router.navigate(['/user-list']);
-            },
-            error: err => {
-              console.log('=== handle error ====')
-              console.log(err)
-            }
-          });
-        this.snackBar.open('User Updated Successfully!', '', { duration: 3000 });
-      } else {
-        const data = {
-          name: this.userData.name,
-          email: this.userData.email,
-          password: this.userData.password,
-          confirmPwd: this.userData.confirmPwd,
-          type: this.userData.type,
-          phone: this.userData.phone,
-          dob: this.userData.dob,
-          address: this.userData.address,
-          created_user_id: this.userInfo.id,
-          updated_user_id: this.userInfo.id,
-          deleted_user_id: this.userInfo.id,
-          created_at: new Date(),
-          updated_at: new Date(),
-          is_removed: 'false'
-        };
-        this.userSvc.createUser(data).subscribe({
-          next: result => {
-            this.router.navigate(['/user-list']);
-          },
-          error: err => {
-            console.log('=== handle error ====')
-            console.log(err)
-          }
-        });
-        this.snackBar.open('User Created Successfully!', '', { duration: 3000 });
-      }
+      const data = {
+        name: this.userData.name,
+        email: this.userData.email,
+        password: this.userData.password,
+        confirmPwd: this.userData.confirmPwd,
+        type: this.userData.type,
+        phone: this.userData.phone,
+        dob: this.userData.dob,
+        address: this.userData.address,
+        created_user_id: this.userInfo.id,
+        updated_user_id: this.userInfo.id,
+        deleted_user_id: this.userInfo.id,
+        created_at: new Date(),
+        updated_at: new Date(),
+        is_removed: 'false'
+      };
+      this.userSvc.createUser(data).subscribe({
+        next: result => {
+        },
+        error: err => {
+          console.log('=== handle error ====')
+          console.log(err)
+        }
+      });
+      this.snackBar.open('User Created Successfully!', '', { duration: 3000 });
+      this.router.navigate(['/user-list']);
     }
+
   }
 
   goBackUserCreate() {
-    if (this.userId) {
-      this.router.navigate(['/user/' + this.userId]);
-    }
-    else {
-      this.router.navigate(['/user']);
-    }
+    this.router.navigate(['/user']);
   }
-
 }
+
+

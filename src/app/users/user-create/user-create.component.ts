@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { SharingDataService } from 'src/app/services/sharing-data.service';
 import { MustMatch } from 'src/app/validators/must-match.validator';
 
@@ -22,19 +22,14 @@ export class UserCreateComponent implements OnInit {
   public userDetail: any;
   public existingUser: any;
   public isEditUser: boolean = true;
-  public currentdate = new Date();
-  NUMBER_OF_DIGITS = 11;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
     private shareDataSvc: SharingDataService
   ) { }
 
   ngOnInit(): void {
-    this.userId = this.activatedRoute.snapshot.params['id'];
-    this.existingUser = this.activatedRoute.snapshot.data['user'];
     this.userForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
@@ -46,25 +41,12 @@ export class UserCreateComponent implements OnInit {
       phone: ['', [Validators.required,
       Validators.pattern("^[0-9]{11}$")
       ]],
-      dob: [this.currentdate],
+      dob: [''],
       address: ['']
     },
       {
         validator: MustMatch('password', 'confirmPwd')
       });
-    if (this.existingUser) {
-      this.userForm.patchValue({
-        id: this.existingUser.id,
-        name: this.existingUser.name,
-        email: this.existingUser.email,
-        password: this.existingUser.password,
-        confirmPwd: this.existingUser.confirmPwd,
-        type: this.existingUser.type,
-        phone: this.existingUser.phone,
-        dob: this.existingUser.dob,
-        address: this.existingUser.address,
-      });
-    }
     this.getUserData();
   }
 
