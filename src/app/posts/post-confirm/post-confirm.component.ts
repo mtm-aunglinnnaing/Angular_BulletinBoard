@@ -90,7 +90,9 @@ export class PostConfirmComponent implements OnInit {
           created_user_id: this.postListDetail.created_user_id,
           updated_user_id: this.userInfo.id,
           created_at: this.postListDetail.created_at,
-          updated_at: new Date()
+          updated_at: new Date(),
+          deleted_at: "",
+          is_removed: false
         };
         this.postSvc.updatePost(data, this.postId)
           .subscribe({
@@ -111,7 +113,9 @@ export class PostConfirmComponent implements OnInit {
           created_user_id: this.userInfo.id,
           updated_user_id: this.userInfo.id,
           created_at: new Date(),
-          updated_at: new Date()
+          updated_at: new Date(),
+          deleted_at: "",
+          is_removed: false
         };
         this.postSvc.createPost(data).subscribe({
           next: result => {
