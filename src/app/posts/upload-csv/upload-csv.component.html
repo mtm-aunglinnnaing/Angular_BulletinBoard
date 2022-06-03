@@ -1,0 +1,12 @@
+<input #fileUploadSimple [accept]="'.csv'" type="file" class="file-input" 
+  (change)="importDataFromCSV($event)" hidden="true">
+<button (click)="fileUploadSimple.click()"> Import File</button> 
+<br><br>
+
+<div>data from csv</div>
+<div *ngFor="let item of importedData"> {{item | json}}</div>
+
+<!--<div class="centered">
+  <input type="file" name="file" id="file" (change)="onFileChange($event)" multiple>
+  <label for="file"><span class="textLink">Select your file</span> or Drop it here!</label>
+</div>-->
