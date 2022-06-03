@@ -60,24 +60,23 @@ export class PostListComponent implements OnInit {
     this.postSvc.getPostDetail(postId).subscribe({
       next: data => {
         this.eachPost = data;
+        const param = {
+          "title": this.eachPost.title,
+          "description": this.eachPost.description,
+          "status": this.eachPost.status,
+          "created_user_id": this.eachPost.created_user_id,
+          "updated_user_id": this.eachPost.updated_user_id,
+          "created_at": this.eachPost.created_at,
+          "is_removed": true,
+          "deleted_at": new Date()
+        }
+        this.postSvc.deletePost(postId, param).subscribe({
+          next: data => { 
+            this.getPostData();
+          }
+        })
       }
     })
-    const param = {
-      "title": this.eachPost.title,
-      "description": this.eachPost.description,
-      "status": this.eachPost.status,
-      "created_user_id": this.eachPost.created_user_id,
-      "updated_user_id": this.eachPost.updated_user_id,
-      "created_at": this.eachPost.created_at,
-      "is_removed": true,
-      "deleted_at": new Date()
-    }
-    this.postSvc.deletePost(postId, param).subscribe({
-      next: data => { 
-        this.getPostData();
-      }
-    })
-    
   }
 
 }
