@@ -2,6 +2,8 @@ import { ViewChild, Component, OnInit, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PostModalComponent } from 'src/app/components/post-modal/post-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 //services
 import { PostService } from 'src/app/services/post.service';
@@ -20,16 +22,18 @@ export class PostListComponent implements OnInit {
   public postDetail: any = [];
   public allPost: any = [];
   public eachPost: any = [];
+  public userData: any = [];
 
   dataSource!: MatTableDataSource<any>;
   displayedColumns: string[] = ['title', 'description', 'created_user_id', 'created_at', 'action', 'action1'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private postSvc: PostService, private usersSvc: UsersService, private router: Router,) { }
+  constructor(private postSvc: PostService, private usersSvc: UsersService, private router: Router, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getPostData();
+    this.login();
   }
 
   getPostData() {
@@ -42,6 +46,12 @@ export class PostListComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
       }
     });
+  }
+  login() {
+    {
+    this.userData = localStorage.getItem('userInfo');
+      return console.log(this.userData);
+    }
   }
 
   applyFilter(filterValue: string) {
@@ -78,6 +88,30 @@ export class PostListComponent implements OnInit {
       }
     })
   }
+
+  titleDetail(postId: any) {
+
+      this.postSvc.getPostDetail(postId).subscribe({
+        next: res => {
+          this.eachPost = res;
+          this.dialog.open(PostModalComponent, {
+            width: '100%',
+            data: {
+              title: res.title,
+              description: res.description,
+              status: res.status,
+              created_user_id: res.created_user_id,
+              updated_user_id: res.updated_user_id,
+              created_at: res.created_at,
+            }
+          });
+        },
+        error: err => {
+          console.log('=== handle error ===');
+          console.log(err);
+        }
+      });
+    }
 
 }
 

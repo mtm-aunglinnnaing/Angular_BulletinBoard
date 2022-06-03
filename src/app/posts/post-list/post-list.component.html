@@ -1,7 +1,7 @@
 <div class="mat-elevation-z8">
   <div class="filter">
     <mat-form-field apperance="standard">
-      <mat-label>Search Post</mat-label>
+      <mat-label>Search Posted</mat-label>
       <input matInput placeholder="Search" type="text" #input>
     </mat-form-field>
     <div class="opr-btn">
@@ -15,9 +15,9 @@
   <table mat-table mat-Sort [dataSource]="dataSource">
 
     <!-- Post Title -->
-    <ng-container matColumnDef="title">
+    <ng-container matColumnDef="title" >
       <th mat-header-cell *matHeaderCellDef> Post Title </th>
-      <td mat-cell *matCellDef="let row"> {{row.title}} </td>
+      <td mat-cell *matCellDef="let row" (click)="titleDetail(row.id)"class="btn-title"> {{row.title}} </td>
     </ng-container>
 
     <!-- Description -->
@@ -38,13 +38,13 @@
       <td mat-cell *matCellDef="let row"> {{row.created_at | date: 'shortDate'}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="action">
+    <ng-container matColumnDef="action" class="edit-btn">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let row">
         <button mat-raised-button (click)="editPost(row.id)">Edit</button>
       </td>
     </ng-container>
-    <ng-container matColumnDef="action1">
+    <ng-container matColumnDef="action1" class="delete-btn">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let row">
         <button mat-raised-button color="warn" (click)="deletePost(row.id)">Delete</button>

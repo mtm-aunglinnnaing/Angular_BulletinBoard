@@ -6,6 +6,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+//services
+import { PostService } from './services/post.service';
+
 //pages
 import { AppComponent } from './app.component';
 import { PostCreateComponent } from './posts/post-create/post-create.component';
@@ -13,9 +16,9 @@ import { PostConfirmComponent } from './posts/post-confirm/post-confirm.componen
 import { UserLoginComponent } from './users/user-login/user-login.component';
 import { PlainModalComponent } from './components/plain-modal/plain-modal.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
+import { PostModalComponent } from './components/post-modal/post-modal.component';
 
-//services
-import { PostService } from './services/post.service';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +27,8 @@ import { PostService } from './services/post.service';
     PostConfirmComponent,
     PlainModalComponent,
     UserLoginComponent,
-    PostListComponent
+    PostListComponent,
+    PostModalComponent,
   ],
   imports: [
     BrowserModule,
