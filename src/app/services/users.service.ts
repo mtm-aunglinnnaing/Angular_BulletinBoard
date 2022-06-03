@@ -16,8 +16,8 @@ export class UsersService {
     return this.http.get(url);
   }
 
-  getUserDetail(userId: number): Observable<any> {
-    const url = this.apiUrl + '/users/' + userId;
+  getUserDetail(paramId: any): Observable<any> {
+    const url = this.apiUrl + '/users/' + paramId;
     return this.http.get(url);
   }
 
@@ -29,8 +29,11 @@ export class UsersService {
   updateUser(data: any, userId: any): Observable<any> {
     const url = this.apiUrl + '/users/' + userId;
     return this.http.put(url, data);
+  } 
+  deleteUser(paramId: number, data: any): Observable<any> {
+    const url = this.apiUrl + '/users/' + paramId;
+    return this.http.put(url, data);
   }
-
 }
 
 

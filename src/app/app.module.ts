@@ -13,17 +13,19 @@ import { PostConfirmComponent } from './posts/post-confirm/post-confirm.componen
 import { UserLoginComponent } from './users/user-login/user-login.component';
 import { PlainModalComponent } from './components/plain-modal/plain-modal.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
+import { UserListComponent } from './users/user-list/user-list.component';
+import { ListModalComponent } from './components/list-modal/list-modal.component';
 import { UserCreateComponent } from './users/user-create/user-create.component';
 import { UserConfirmComponent } from './users/user-confirm/user-confirm.component';
-
 
 //services
 import { PostService } from './services/post.service';
 import { UsersService } from './services/users.service';
 
-//pippes
+//pipes
 import { PasswordPipe } from './pipes/password.pipe';
 import { UserTypePipe } from './pipes/user-type.pipe';
+
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { UserTypePipe } from './pipes/user-type.pipe';
     PlainModalComponent,
     UserLoginComponent,
     PostListComponent,
+    UserListComponent,
+    ListModalComponent,
     UserCreateComponent,
     UserConfirmComponent,
     PasswordPipe,
@@ -51,8 +55,7 @@ import { UserTypePipe } from './pipes/user-type.pipe';
     PostService,
     UsersService,
     PasswordPipe,
-    UserTypePipe
-  ],
+    UserTypePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
