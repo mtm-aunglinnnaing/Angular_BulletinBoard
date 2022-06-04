@@ -18,6 +18,7 @@ import { ListModalComponent } from './components/list-modal/list-modal.component
 
 //services
 import { PostService } from './services/post.service';
+import { CsvDownloadComponent } from './posts/csv-download/csv-download.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PostService } from './services/post.service';
     UserLoginComponent,
     PostListComponent,
     UserListComponent,
-    ListModalComponent
+    ListModalComponent,
+    CsvDownloadComponent
   ],
   imports: [
     BrowserModule,
