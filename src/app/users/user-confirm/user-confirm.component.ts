@@ -45,7 +45,6 @@ export class UserConfirmComponent implements OnInit {
   }
 
   createUser() {
-
     const duplicateUser = this.userList.filter((item: any) => item.email === this.userData.email);
     if (duplicateUser.length > 0) {
       this.dialog.open(PlainModalComponent, {
@@ -60,7 +59,6 @@ export class UserConfirmComponent implements OnInit {
         name: this.userData.name,
         email: this.userData.email,
         password: this.userData.password,
-        confirmPwd: this.userData.confirmPwd,
         type: this.userData.type,
         phone: this.userData.phone,
         dob: this.userData.dob,
@@ -70,6 +68,7 @@ export class UserConfirmComponent implements OnInit {
         deleted_user_id: this.userInfo.id,
         created_at: new Date(),
         updated_at: new Date(),
+        deleted_at: '',
         is_removed: 'false'
       };
       this.userSvc.createUser(data).subscribe({
@@ -83,7 +82,6 @@ export class UserConfirmComponent implements OnInit {
       this.snackBar.open('User Created Successfully!', '', { duration: 3000 });
       this.router.navigate(['/user-list']);
     }
-
   }
 
   goBackUserCreate() {

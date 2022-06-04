@@ -17,6 +17,8 @@ import { UserListComponent } from './users/user-list/user-list.component';
 import { ListModalComponent } from './components/list-modal/list-modal.component';
 import { UserCreateComponent } from './users/user-create/user-create.component';
 import { UserConfirmComponent } from './users/user-confirm/user-confirm.component';
+import { UserUpdateComponent } from './users/user-update/user-update.component';
+import { UserUpdateConfirmComponent } from './users/user-update-confirm/user-update-confirm.component';
 
 //services
 import { PostService } from './services/post.service';
@@ -24,8 +26,6 @@ import { UsersService } from './services/users.service';
 
 //pipes
 import { PasswordPipe } from './pipes/password.pipe';
-import { UserTypePipe } from './pipes/user-type.pipe';
-
 
 @NgModule({
   declarations: [
@@ -39,8 +39,9 @@ import { UserTypePipe } from './pipes/user-type.pipe';
     ListModalComponent,
     UserCreateComponent,
     UserConfirmComponent,
+    UserUpdateComponent,
+    UserUpdateConfirmComponent,
     PasswordPipe,
-    UserTypePipe
   ],
   imports: [
     BrowserModule,
@@ -54,8 +55,7 @@ import { UserTypePipe } from './pipes/user-type.pipe';
   providers: [
     PostService,
     UsersService,
-    PasswordPipe,
-    UserTypePipe],
+    PasswordPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
