@@ -13,7 +13,7 @@ import { PostResolver } from './resolver/post.resolver';
 
 //guard
 import { AuthGuard } from './guards/auth.guard';
-import { CsvDownloadComponent } from './posts/csv-download/csv-download.component';
+
 
 const routes: Routes = [
   { path: '', component: UserLoginComponent },
@@ -22,8 +22,7 @@ const routes: Routes = [
   { path: 'post', component: PostCreateComponent, canActivate: [AuthGuard] },
   { path: 'post/:id', component: PostCreateComponent, resolve: { post: PostResolver }, canActivate: [AuthGuard] },
   { path: 'post-confirm', component: PostConfirmComponent, canActivate: [AuthGuard] },
-  { path: 'user-list', component: UserListComponent },
-  { path: 'download', component: CsvDownloadComponent }
+  { path: 'user-list', component: UserListComponent }
 ];
 
 @NgModule({

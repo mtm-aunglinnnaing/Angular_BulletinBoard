@@ -5,6 +5,8 @@ import { AngularMaterialModule } from './angular-material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { MatTableExporterModule } from 'mat-table-exporter';
+import { CdkTableExporterModule } from 'cdk-table-exporter';
 
 //pages
 import { AppComponent } from './app.component';
@@ -18,7 +20,7 @@ import { ListModalComponent } from './components/list-modal/list-modal.component
 
 //services
 import { PostService } from './services/post.service';
-import { CsvDownloadComponent } from './posts/csv-download/csv-download.component';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +32,6 @@ import { CsvDownloadComponent } from './posts/csv-download/csv-download.componen
     PostListComponent,
     UserListComponent,
     ListModalComponent,
-    CsvDownloadComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +40,9 @@ import { CsvDownloadComponent } from './posts/csv-download/csv-download.componen
     AngularMaterialModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatTableExporterModule,
+    CdkTableExporterModule
   ],
   providers: [PostService],
   bootstrap: [AppComponent]
