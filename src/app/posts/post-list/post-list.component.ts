@@ -7,9 +7,6 @@ import { MatDialog } from '@angular/material/dialog';
 
 //services
 import { PostService } from 'src/app/services/post.service';
-import { UsersService } from 'src/app/services/users.service';
-
-
 
 @Component({
   selector: 'app-post-list',
@@ -22,18 +19,28 @@ export class PostListComponent implements OnInit {
   public postDetail: any = [];
   public allPost: any = [];
   public eachPost: any = [];
-  public userData: any = [];
+  public userInfo: any = [];
+  public postListDetail: any = [];
+  public postId: any = [];
 
   dataSource!: MatTableDataSource<any>;
   displayedColumns: string[] = ['title', 'description', 'created_user_id', 'created_at', 'action', 'action1'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private postSvc: PostService, private usersSvc: UsersService, private router: Router, public dialog: MatDialog) { }
+  constructor(private postSvc: PostService, private router: Router, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.getPostData();
     this.login();
+  }
+
+  login() {
+    this.userInfo = JSON.parse(localStorage.getItem('userInfo') || '[]');
+    if (this.userInfo.type === 0) {
+      this.getPostData();
+    } else {
+      return console.log("user")
+    }
   }
 
   getPostData() {
@@ -47,11 +54,18 @@ export class PostListComponent implements OnInit {
       }
     });
   }
-  login() {
-    {
-    this.userData = localStorage.getItem('userInfo');
-      return console.log(this.userData);
-    }
+  getEachPost() {
+    this.postSvc.getPostDetail(this.postId).subscribe({
+      next: result => {
+        this.postListDetail = this.postId.filter((data: any) => {
+          return data.is_removed == false;
+        });
+        this.dataSource = new MatTableDataSource(this.postListDetail);
+        this.dataSource.paginator = this.paginator;
+      },
+    });
+    this.dataSource = new MatTableDataSource(this.postListDetail);
+    this.dataSource.paginator = this.paginator;
   }
 
   applyFilter(filterValue: string) {
@@ -83,6 +97,7 @@ export class PostListComponent implements OnInit {
         this.postSvc.deletePost(postId, param).subscribe({
           next: data => { 
             this.getPostData();
+            this.getEachPost();
           }
         })
       }

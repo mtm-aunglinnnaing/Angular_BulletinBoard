@@ -23,6 +23,14 @@ export class UsersService {
     const url = this.apiUrl + '/users/' + paramId;
     return this.http.put(url, data);
   }
+  getUserCreatedPost(): Observable<any> {
+    const url = this.apiUrl + '/users';
+    return this.http.get(url);
+  }
+  getUsersParams(postId: any): Observable<any> {
+    const url = 'https://reqres.in/api/post?created_user_id=postId';
+    return this.http.get(url);
+}
 }
 
 

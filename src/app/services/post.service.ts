@@ -28,7 +28,10 @@ export class PostService {
     return this.http.get(url);
   }
 
-
+  getUsersParams(postId: any): Observable<any> {
+    const url = this.apiUrl + '/posts?created_user_id=postId';
+    return this.http.get(url);
+}
 
 
 
