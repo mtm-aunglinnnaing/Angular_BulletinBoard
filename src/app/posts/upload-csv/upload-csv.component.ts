@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+
+//pages
+import { PlainModalComponent } from 'src/app/components/plain-modal/plain-modal.component';
+
+//interface
+import { CSVRecord } from 'src/app/interfaces/CSVModel';
 
 //services
 import { PostService } from 'src/app/services/post.service';
-import { CsvService } from 'src/app/services/csv.service';
 
 @Component({
   selector: 'app-upload-csv',
@@ -12,59 +17,131 @@ import { CsvService } from 'src/app/services/csv.service';
   styleUrls: ['./upload-csv.component.scss']
 })
 export class UploadCsvComponent implements OnInit {
-  public importedData: any = [];
-  public userInfo: any;
-  //public files: any[] = [];
-  constructor(
-    private router: Router,
-    private postSvc: PostService,
-    private snackBar: MatSnackBar,
-    private _csvService: CsvService) { }
 
+  public userInfo: any;
+  public records: any;
+  public postList: any = [];
+  public duplicateTitle: any;
+  constructor(
+    private postSvc: PostService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar) { }
+
+  @ViewChild('csvReader') csvReader: any;
   ngOnInit(): void {
     this.userInfo = JSON.parse(localStorage.getItem('userInfo') || "[]");
+    this.getPostList();
   }
 
-  //onFileChange(pFileList: any){
-  //  this.files = Object.keys(pFileList.target.files[0]).map(key => pFileList[key]);
-  //  console.log(this.files);
-  //}
-
-  public async importDataFromCSV(event: any) {
-    let fileContent = await this.getTextFromFile(event);
-    this.importedData = this._csvService.importDataFromCSV(fileContent);
-    console.log(this.importedData);
-    //const csvData = this.importedData.map(({ result }: any) => {
-    //  return result;
-    //});
-    //console.log(csvData);
-    //const data = {
-    //  title: csvData.title,
-    //  description: csvData.description,
-    //  status: 1,
-    //  created_user_id: this.userInfo.id,
-    //  updated_user_id: this.userInfo.id,
-    //  created_at: new Date(),
-    //  updated_at: new Date()
-    //};
-    //this.postSvc.createPost(data).subscribe({
-    //  next: result => {
-    //    
-    //  },
-    //  error: err => {
-    //    console.log('=== handle error ====')
-    //    console.log(err)
-    //  }
-    //});
-    //this.snackBar.open('Post Created Successfully!', '', { duration: 3000 });
-    //this.router.navigate(['/post-list']);
-  }
-  
-  private async getTextFromFile(event:any){
-    const file: File = event.target.files[0];
-    let fileContent = await file.text();
-
-    return fileContent;
+  getPostList() {
+    this.postSvc.geAllPost().subscribe({
+      next: result => {
+        this.postList = result;
+      },
+      error: err => {
+        console.log('=== handle error ====')
+        console.log(err)
+      }
+    });
   }
 
+  uploadListener($event: any): void {
+
+    let uploadData: any = [];
+    let files = $event.srcElement.files;
+
+    if (this.isValidCSVFile(files[0])) {
+
+      let input = $event.target;
+      let reader = new FileReader();
+      reader.readAsText(input.files[0]);
+
+      reader.onload = () => {
+        let csvData = reader.result;
+        let csvRecordsArray = (<string>csvData).split(/\r\n|\n/);
+
+        let headersRow = this.getHeaderArray(csvRecordsArray);
+
+        this.records = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
+
+        //check duplicate title
+        let csvTitle = this.records.map((rTitle: any) => { return rTitle.title });
+        this.duplicateTitle = this.postList.filter((item: any) => csvTitle.includes(item.title));
+
+        if (this.duplicateTitle.length > 0) {
+          const csvTitle = this.duplicateTitle.map((item: any)=> item.title)
+          this.dialog.open(PlainModalComponent, {
+            data: {
+              content: `${csvTitle} already exists in the post list!`,
+              note: '',
+              applyText: 'Ok'
+            }
+          })
+        } else {
+          this.records.map((result: any) => {
+            let res = {
+              title: result.title,
+              description: result.description,
+              status: 1,
+              created_user_id: this.userInfo.id,
+              updated_user_id: this.userInfo.id,
+              created_at: new Date(),
+              updated_at: new Date(),
+              deleted_at: "",
+              is_removed: false
+            }
+
+            uploadData = res;
+
+            this.postSvc.createPost(uploadData).subscribe({
+              next: result => {
+              }
+            });
+          })
+          this.snackBar.open('Post Created Successfully!', '', { duration: 3000 });
+        }
+      };
+
+      reader.onerror = function () {
+        console.log('Error is occured while reading file!');
+      };
+
+    } else {
+      alert("Please import valid .csv file.");
+      this.fileReset();
+    }
+  }
+
+  getDataRecordsArrayFromCSVFile(csvRecordsArray: any, headerLength: any) {
+    let csvArr = [];
+
+    for (let i = 1; i < csvRecordsArray.length; i++) {
+      let curruntRecord = (<string>csvRecordsArray[i]).split(',');
+      if (curruntRecord.length == headerLength) {
+        let csvRecord: CSVRecord = new CSVRecord();
+        csvRecord.title = curruntRecord[0];
+        csvRecord.description = curruntRecord[1];
+        csvArr.push(csvRecord);
+      }
+    }
+    return csvArr;
+  }
+
+  isValidCSVFile(file: any) {
+    return file.name.endsWith(".csv");
+  }
+
+  getHeaderArray(csvRecordsArr: any) {
+    let headers = (<string>csvRecordsArr[0]).split(',');
+    let headerArray = [];
+    for (let j = 0; j < headers.length; j++) {
+      headerArray.push(headers[j]);
+    }
+    return headerArray;
+  }
+
+  fileReset() {
+    this.csvReader.nativeElement.value = "";
+    this.records = [];
+  }
 }

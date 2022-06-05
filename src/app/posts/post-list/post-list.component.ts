@@ -1,10 +1,13 @@
 import { ViewChild, Component, OnInit, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+
+//pages
+import { UploadCsvComponent } from '../upload-csv/upload-csv.component';
 
 //services
 import { PostService } from 'src/app/services/post.service';
-
 
 export interface PeriodicElement {
   name: string;
@@ -24,7 +27,8 @@ export class PostListComponent implements OnInit {
   displayedColumns: string[] = ['title', 'description', 'created_user_id', 'created_date'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private postSvc: PostService) { }
+  constructor(private postSvc: PostService,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -39,6 +43,20 @@ export class PostListComponent implements OnInit {
     filterValue = filterValue.trim();
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
+  }
+
+  uploadCSV() {
+    let dialogRef = this.dialog.open(UploadCsvComponent, {
+      width: '500px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.postSvc.geAllPost().subscribe((data) => {
+        this.posts = data;
+        this.dataSource = new MatTableDataSource(this.posts);
+        this.dataSource.paginator = this.paginator;
+      })
+    })
   }
 }
 
