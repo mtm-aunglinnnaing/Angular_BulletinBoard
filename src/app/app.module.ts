@@ -20,6 +20,11 @@ import { ListModalComponent } from './components/list-modal/list-modal.component
 
 //services
 import { PostService } from './services/post.service';
+import { UserCreateComponent } from './users/user-create/user-create.component';
+import { UserConfirmComponent } from './users/user-confirm/user-confirm.component';
+import { UserUpdateComponent } from './users/user-update/user-update.component';
+import { UserUpdateConfirmComponent } from './users/user-update-confirm/user-update-confirm.component';
+import { PasswordPipe } from './pipes/password.pipe';
 
 
 @NgModule({
@@ -32,6 +37,11 @@ import { PostService } from './services/post.service';
     PostListComponent,
     UserListComponent,
     ListModalComponent,
+    UserCreateComponent,
+    UserConfirmComponent,
+    UserUpdateComponent,
+    UserUpdateConfirmComponent,
+    PasswordPipe
   ],
   imports: [
     BrowserModule,
