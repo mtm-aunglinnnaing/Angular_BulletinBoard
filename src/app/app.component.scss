@@ -3,18 +3,31 @@
    margin-top: 10px;
 
    a {
-     margin-right: 10px;
-     color: #000000;
+     margin-right: 5px;
      text-decoration: none;
+     font-size: 16px;
+   }
+
+   .active{
+     color:#FFCD38;
    }
 
    .title {
-     margin-right: 10px;
+     margin-right: 20px;
      font-size: 25px;
      font-weight: bold;
+     cursor: pointer;
    }
 
    .rt-nav {
      float: right;
+     .profile{
+       margin-right: 20px;
+     }
+     mat-icon{
+       margin-bottom: 5px;
+       transform: scale(0.8);
+     }
    }
+
  }

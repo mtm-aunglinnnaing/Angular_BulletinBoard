@@ -1,18 +1,18 @@
-<mat-toolbar *ngIf="showNavBar">
+<mat-toolbar color="primary" *ngIf="showNavBar">
   <div class="nav">
     <span class="title" [routerLink]="['/post-list']">SCM Bulletin Board</span>
-    <a *ngIf="user?.id && user?.type === 0" [routerLink]="['/users-list']">Users</a>
-    <a *ngIf="user?.id && user?.type === 1" [routerLink]="['/user-profile']">User</a>
-    <a [routerLink]="['/post-list']">Posts</a>
+    <a mat-flat-button color="primary" *ngIf="user?.id && user?.type === 0" [routerLink]="['/user-list']" routerLinkActive="active">Users</a>
+    <a mat-flat-button color="primary" *ngIf="user?.id && user?.type === 1" [routerLink]="['/user-profile']" routerLinkActive="active">User</a>
+    <a mat-flat-button color="primary" [routerLink]="['/post-list']" routerLinkActive="active">Posts</a>
     <span class="rt-nav">
-      <a *ngIf="user?.id" [routerLink]="['/user-profile']">{{user.name}}</a>
-      <a (click)="logout()">Logout</a>
+      <a mat-flat-button color="accent" *ngIf="user?.id" class="profile" [routerLink]="['/user-profile']"><mat-icon>person</mat-icon>{{user.name}}</a>
+      <a mat-flat-button color="warn" (click)="logout()"><mat-icon>exit_to_app</mat-icon>Logout</a>
     </span>
   </div>
 </mat-toolbar>
-<mat-toolbar *ngIf="!showNavBar">
+<mat-toolbar color="primary" *ngIf="!showNavBar">
   <div class="nav">
-    <span class="title" [routerLink]="['/post-list']">SCM Bulletin Board</span>
+    <span class="title" [routerLink]="['/login']">SCM Bulletin Board</span>
   </div>
 </mat-toolbar>
 <router-outlet></router-outlet>
