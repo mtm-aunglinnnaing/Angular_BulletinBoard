@@ -41,19 +41,17 @@ export class PostListComponent implements OnInit {
     if (this.userInfo.type === 0) {
       this.getPostData();
     } else {
-        this.postSvc.getUsersParams(this.userInfo.id).subscribe({
+        this.postSvc.getPost().subscribe({
           next: posts => {
-            console.log(posts);
-            //this.eachPost = posts.filter((data: any) => {
-            //  return data.is_removed == false;
-            //});
             this.postListDetail = posts.filter((data: any) => {
-              return data.is_removed == false;
+              return data.created_user_id === this.userInfo.id && data.is_removed == false;
             });
+            console.log(this.postListDetail);
+            this.dataSource = new MatTableDataSource(this.postListDetail);
+            this.dataSource.paginator = this.paginator;
           }
         });
-        this.dataSource = new MatTableDataSource(this.postListDetail);
-        this.dataSource.paginator = this.paginator;
+        
       }
   }
 

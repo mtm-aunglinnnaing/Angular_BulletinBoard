@@ -22,24 +22,10 @@ export class PostService {
     const url = this.apiUrl + '/posts/' + postId;
     return this.http.put(url, data);
   }
-
   getPostDetail(postId: any): Observable<any> {
     const url = this.apiUrl + '/posts/' + postId;
     return this.http.get(url);
   }
-
-  getUsersParams(userId: any): Observable<any> {
-    const url = this.apiUrl + `/posts?id=${userId}`;
-    return this.http.get(url);
-}
-
-getPostParams(postId: any) {
-  let params = new HttpParams().set("created_user_id", postId);
-  const url = this.apiUrl + '/post?id=created_user_id';
-  return this.http.get(url, {params});
-}
-
-
   geAllPost(): Observable<any> {
     const url = this.apiUrl + '/posts';
     return this.http.get(url);
