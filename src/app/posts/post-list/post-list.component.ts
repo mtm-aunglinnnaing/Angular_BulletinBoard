@@ -1,5 +1,7 @@
 import { ViewChild, Component, OnInit, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { CdkTableExporterModule } from 'cdk-table-exporter';
+import { MatTableExporterModule, MatTableExporterDirective } from 'mat-table-exporter';
 import { MatTableDataSource } from '@angular/material/table';
 
 //services
@@ -19,6 +21,7 @@ export interface PeriodicElement {
 })
 
 export class PostListComponent implements OnInit {
+
   dataSource!: MatTableDataSource<PeriodicElement>;
   posts: any;
   displayedColumns: string[] = ['title', 'description', 'created_user_id', 'created_date'];
@@ -33,7 +36,7 @@ export class PostListComponent implements OnInit {
       this.posts = data;
       this.dataSource = new MatTableDataSource(this.posts);
       this.dataSource.paginator = this.paginator;
-    })
+    });
   }
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim();

@@ -17,7 +17,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatTabsModule } from '@angular/material/tabs'
+import { MatTabsModule } from '@angular/material/tabs';
+import {MatTableExporterModule } from 'mat-table-exporter';
 
 @NgModule({
   declarations: [],
@@ -41,7 +42,8 @@ import { MatTabsModule } from '@angular/material/tabs'
     MatRadioModule,
     MatSelectModule,
     MatPaginatorModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTableExporterModule
   ]
 })
 export class AngularMaterialModule { }
