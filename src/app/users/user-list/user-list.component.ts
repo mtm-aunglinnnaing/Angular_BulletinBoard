@@ -84,6 +84,10 @@ export class UserListComponent implements OnInit {
     });
   }
 
+  updateUserData(userId: any) {
+    this.router.navigate(['/user/' + userId]);
+  }
+
   deleteUserData(userId: any) {
     this.usersSvc.getUserDetail(userId).subscribe({
       next: data => {

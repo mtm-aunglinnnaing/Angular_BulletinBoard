@@ -17,15 +17,19 @@ import { PlainModalComponent } from './components/plain-modal/plain-modal.compon
 import { PostListComponent } from './posts/post-list/post-list.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { ListModalComponent } from './components/list-modal/list-modal.component';
-
-//services
-import { PostService } from './services/post.service';
+import { UserProfileComponent } from './users/user-profile/user-profile.component';
+import { PasswordChangeComponent } from './users/password-change/password-change.component';
+import { UploadCsvComponent } from './posts/upload-csv/upload-csv.component';
 import { UserCreateComponent } from './users/user-create/user-create.component';
 import { UserConfirmComponent } from './users/user-confirm/user-confirm.component';
 import { UserUpdateComponent } from './users/user-update/user-update.component';
 import { UserUpdateConfirmComponent } from './users/user-update-confirm/user-update-confirm.component';
+
+//pipes
 import { PasswordPipe } from './pipes/password.pipe';
 
+//services
+import { PostService } from './services/post.service';
 
 @NgModule({
   declarations: [
@@ -37,6 +41,9 @@ import { PasswordPipe } from './pipes/password.pipe';
     PostListComponent,
     UserListComponent,
     ListModalComponent,
+    PasswordChangeComponent,
+    UserProfileComponent,
+    UploadCsvComponent,
     UserCreateComponent,
     UserConfirmComponent,
     UserUpdateComponent,
