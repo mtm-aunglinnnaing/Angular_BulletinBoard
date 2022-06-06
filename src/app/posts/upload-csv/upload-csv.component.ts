@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialogRef } from '@angular/material/dialog';
 
 //pages
 import { PlainModalComponent } from 'src/app/components/plain-modal/plain-modal.component';
@@ -10,6 +11,7 @@ import { CSVRecord } from 'src/app/interfaces/CSVModel';
 
 //services
 import { PostService } from 'src/app/services/post.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-upload-csv',
@@ -25,7 +27,9 @@ export class UploadCsvComponent implements OnInit {
   constructor(
     private postSvc: PostService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar,
+    private router: Router,
+    private dialogRef: MatDialogRef<UploadCsvComponent>) { }
 
   @ViewChild('csvReader') csvReader: any;
   ngOnInit(): void {
@@ -67,6 +71,7 @@ export class UploadCsvComponent implements OnInit {
         //check duplicate title
         let csvTitle = this.records.map((rTitle: any) => { return rTitle.title });
         this.duplicateTitle = this.postList.filter((item: any) => csvTitle.includes(item.title));
+        //alert(this.duplicateTitle.length);
 
         if (this.duplicateTitle.length > 0) {
           const csvTitle = this.duplicateTitle.map((item: any)=> item.title)
@@ -100,6 +105,7 @@ export class UploadCsvComponent implements OnInit {
           })
           this.snackBar.open('Post Created Successfully!', '', { duration: 3000 });
         }
+        this.dialogRef.close();
       };
 
       reader.onerror = function () {

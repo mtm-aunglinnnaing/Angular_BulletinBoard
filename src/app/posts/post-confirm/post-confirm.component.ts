@@ -71,7 +71,7 @@ export class PostConfirmComponent implements OnInit {
   }
 
   createPost() {
-    const duplicateTitle = this.postList.filter((item: any) => item.title === this.postData.title);
+    const duplicateTitle = this.postList.filter((item: any) => item.title === this.postData.title && item.id != this.postId);
 
     if (duplicateTitle.length > 0) {
       this.dialog.open(PlainModalComponent, {
