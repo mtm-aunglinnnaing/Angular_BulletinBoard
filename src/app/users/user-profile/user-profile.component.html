@@ -1,0 +1,56 @@
+<div class="container">
+  <h2>User Profile</h2>
+  <table class="user-table">
+    <tr>
+      <td class="label">Name</td>
+      <td>{{userInfo.name}}</td>
+    </tr>
+    <tr>
+      <td class="label">Email Address</td>
+      <td>{{userInfo.email}}</td>
+    </tr>
+    <tr>
+      <td class="label">Password</td>
+      <td>{{userInfo.password}}</td>
+    </tr>
+    <tr>
+      <td class="label">Type</td>
+      <td>{{userInfo.type}}</td>
+    </tr>
+    <tr>
+      <td class="label">Phone</td>
+      <td>{{userInfo.phone}}</td>
+    </tr>
+    <tr>
+      <td class="label">Date Of Birth</td>
+      <td>{{userInfo.dob | date: 'shortDate'}}</td>
+    </tr>
+    <tr>
+      <td class="label">Address</td>
+      <td>{{userInfo.address}}</td>
+    </tr>
+  </table>
+  <!--<mat-list role="list">
+    <mat-list-item role="listitem">
+      <span></span> 
+    </mat-list-item>
+    <mat-list-item role="listitem">
+      <span></span> 
+    </mat-list-item>
+    <mat-list-item role="listitem">
+      <span>Password</span>
+    </mat-list-item>
+    <mat-list-item role="listitem">
+      <span>Type</span> {{userInfo.type}}
+    </mat-list-item>
+    <mat-list-item role="listitem">
+      <span>Phone</span> {{userInfo.phone}}
+    </mat-list-item>
+    <mat-list-item role="listitem">
+      <span>Date Of Birth</span> {{userInfo.dob}}
+    </mat-list-item>
+    <mat-list-item role="listitem">
+      <span>Address</span> {{userInfo.address}}
+    </mat-list-item>
+  </mat-list>-->
+</div>

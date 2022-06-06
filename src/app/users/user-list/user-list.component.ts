@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 //services
 import { UsersService } from 'src/app/services/users.service';
@@ -31,7 +32,8 @@ export class UserListComponent implements OnInit {
   constructor(
     private router: Router,
     private usersSvc: UsersService,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar) {
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -86,38 +88,41 @@ export class UserListComponent implements OnInit {
     this.usersSvc.getUserDetail(userId).subscribe({
       next: data => {
         this.eachUser = data;
+        const param = {
+          id: userId,
+          name: this.eachUser.name,
+          email: this.eachUser.email,
+          password: this.eachUser.password,
+          type: this.eachUser.type,
+          phone: this.eachUser.phone,
+          address: this.eachUser.address,
+          dob: this.eachUser.dob,
+          created_user_id: this.eachUser.created_user_id,
+          updated_user_id: this.eachUser.updated_user_id,
+          deleted_user_id: this.userInfo.id,
+          created_at: this.eachUser.created_at,
+          updated_at: this.eachUser.updated_at,
+          deleted_at: new Date(),
+          is_removed: true
+        };
+        this.usersSvc.deleteUser(userId, param).subscribe({
+          next: data => {
+            this.snackBar.open('User Deleted Successfully!', '', { duration: 3000 });
+            this.getUserData();
+          },
+          error: err => {
+            console.log('=== handle error ===');
+            console.log(err);
+          }
+        })
       }
     });
-    const param = {
-      "id": userId,
-      "name": this.eachUser.name,
-      "email": this.eachUser.email,
-      "password": this.eachUser.password,
-      "type": this.eachUser.type,
-      "phone": this.eachUser.phone,
-      "address": this.eachUser.address,
-      "dob": this.eachUser.dob,
-      "created_user_id": this.eachUser.created_user_id,
-      "updated_user_id": this.eachUser.updated_user_id,
-      "deleted_user_id": this.userInfo.id,
-      "created_at": this.eachUser.created_at,
-      "updated_at": this.eachUser.updated_at,
-      "deleted_at": new Date(),
-      "is_removed": true
-    };
-    this.usersSvc.deleteUser(userId, param).subscribe({
-      next: data => {
-        alert('Deleted successfully!!!');
-        this.getUserData();
-      },
-      error: err => {
-        console.log('=== handle error ===');
-        console.log(err);
-      }
-    })
   }
 
   onSearch() {
+    if (!this.nameFilter && !this.emailFilter && !this.fromDate && !this.toDate) {
+      this.getUserData();
+    }
     if (this.nameFilter && !this.emailFilter && !this.fromDate && !this.toDate) {
       //for name filter
       let result = this.orgList.filter((e: any) => {

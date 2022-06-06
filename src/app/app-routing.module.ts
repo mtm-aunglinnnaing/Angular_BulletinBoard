@@ -6,8 +6,9 @@ import { PostCreateComponent } from './posts/post-create/post-create.component';
 import { PostConfirmComponent } from './posts/post-confirm/post-confirm.component';
 import { UserLoginComponent } from './users/user-login/user-login.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
-import { PasswordChangeComponent } from './users/password-change/password-change.component';
 import { UserListComponent } from './users/user-list/user-list.component';
+import { UserProfileComponent } from './users/user-profile/user-profile.component';
+import { PasswordChangeComponent } from './users/password-change/password-change.component';
 
 //resolver
 import { PostResolver } from './resolver/post.resolver';
@@ -22,8 +23,9 @@ const routes: Routes = [
   { path: 'post', component: PostCreateComponent, canActivate: [AuthGuard] },
   { path: 'post/:id', component: PostCreateComponent, resolve: { post: PostResolver }, canActivate: [AuthGuard] },
   { path: 'post-confirm', component: PostConfirmComponent, canActivate: [AuthGuard] },
-  { path: 'password-change', component: PasswordChangeComponent, canActivate: [AuthGuard] },
-  { path: 'user-list', component: UserListComponent }
+  { path: 'user-list', component: UserListComponent, canActivate: [AuthGuard] },
+  { path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard] },
+  { path: 'password-change', component: PasswordChangeComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
