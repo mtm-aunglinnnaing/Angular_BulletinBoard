@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -28,11 +28,16 @@ export class PostService {
     return this.http.get(url);
   }
 
-  getUsersParams(postId: any): Observable<any> {
-    const url = this.apiUrl + '/posts?created_user_id=postId';
+  getUsersParams(userId: any): Observable<any> {
+    const url = this.apiUrl + `/posts?id=${userId}`;
     return this.http.get(url);
 }
 
+getPostParams(postId: any) {
+  let params = new HttpParams().set("created_user_id", postId);
+  const url = this.apiUrl + '/post?id=created_user_id';
+  return this.http.get(url, {params});
+}
 
 
   geAllPost(): Observable<any> {
