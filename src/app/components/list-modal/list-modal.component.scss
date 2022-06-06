@@ -1,4 +1,15 @@
-span {
-  margin-right: 10px;
-  font-weight: bold;
+.container{
+  h2 {
+    margin-bottom: 0;
+  }
+  
+  span {
+    margin-right: 10px;
+    font-weight: bold;
+  }
+
+  .btn-close{
+    display: flex;
+    justify-content: flex-end;
+  }
 }

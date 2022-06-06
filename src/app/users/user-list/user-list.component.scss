@@ -2,14 +2,32 @@
   width: 80%;
   margin: 30px auto;
 
+  .title {
+    margin-bottom: 0;
+  }
+
   .search-blk {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+
+    .filter {
+      margin-right: 30px;
+    }
 
     .btn-blk {
       .btn-search {
         margin-right: 30px;
+
+        mat-icon {
+          margin-bottom: 5px;
+          transform: scale(0.8);
+        }
+      }
+
+      mat-icon {
+        margin-right: 5px;
+        margin-bottom: 5px;
+        transform: scale(0.8);
       }
     }
   }

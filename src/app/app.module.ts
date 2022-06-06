@@ -15,6 +15,8 @@ import { PlainModalComponent } from './components/plain-modal/plain-modal.compon
 import { PostListComponent } from './posts/post-list/post-list.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { ListModalComponent } from './components/list-modal/list-modal.component';
+import { UserProfileComponent } from './users/user-profile/user-profile.component';
+import { PasswordChangeComponent } from './users/password-change/password-change.component';
 import { UploadCsvComponent } from './posts/upload-csv/upload-csv.component';
 
 //services
@@ -30,6 +32,8 @@ import { PostService } from './services/post.service';
     PostListComponent,
     UserListComponent,
     ListModalComponent,
+    PasswordChangeComponent,
+    UserProfileComponent,
     UploadCsvComponent
   ],
   imports: [
