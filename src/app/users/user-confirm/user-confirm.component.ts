@@ -61,15 +61,15 @@ export class UserConfirmComponent implements OnInit {
         password: this.userData.password,
         type: this.userData.type,
         phone: this.userData.phone,
-        dob: this.userData.dob,
         address: this.userData.address,
+        dob: this.userData.dob,
         created_user_id: this.userInfo.id,
         updated_user_id: this.userInfo.id,
         deleted_user_id: this.userInfo.id,
         created_at: new Date(),
         updated_at: new Date(),
         deleted_at: '',
-        is_removed: 'false'
+        is_removed: false
       };
       this.userSvc.createUser(data).subscribe({
         next: result => {

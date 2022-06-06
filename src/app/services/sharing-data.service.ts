@@ -14,7 +14,7 @@ export class SharingDataService {
   }
 
   getPostData() {
-    return this.userData;
+    return this.postData;
   }
 
   setUserData(data: any) {

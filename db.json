@@ -149,6 +149,16 @@
       "description": "About User",
       "created_user_id": "User 20",
       "created_date": "1/5/2001"
+    },
+    {
+      "title": "aat",
+      "description": "MLMLML",
+      "status": 0,
+      "created_user_id": 15,
+      "updated_user_id": 15,
+      "created_at": "2022-06-05T03:43:55.929Z",
+      "updated_at": "2022-06-05T03:44:13.445Z",
+      "id": 4
     }
   ],
   "users": [
@@ -467,11 +477,28 @@
       "dob": "19/9/1999",
       "created_user_id": 4,
       "updated_user_id": 4,
-      "deleted_user_id": 4,
+      "deleted_user_id": 15,
       "created_at": "2022-05-30T23:51:09.273Z",
       "updated_at": "2022-05-30T23:51:09.273Z",
+      "deleted_at": "2022-06-05T03:50:53.718Z",
+      "is_removed": true
+    },
+    {
+      "name": "User 20",
+      "email": "user20@gmail.com",
+      "password": "User12345",
+      "type": 1,
+      "phone": "09780152981",
+      "address": "MLM",
+      "dob": "2022-06-01T07:00:00.000Z",
+      "created_user_id": 15,
+      "updated_user_id": 15,
+      "deleted_user_id": 15,
+      "created_at": "2022-06-05T03:57:15.600Z",
+      "updated_at": "2022-06-05T03:57:15.600Z",
       "deleted_at": "",
-      "is_removed": false
+      "is_removed": false,
+      "id": 20
     }
   ]
 }
