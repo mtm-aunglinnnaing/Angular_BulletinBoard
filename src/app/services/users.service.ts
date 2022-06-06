@@ -21,11 +21,16 @@ export class UsersService {
     return this.http.get(url);
   }
 
+  createUser(data: any): Observable<any> {
+    const url = this.apiUrl + '/users';
+    return this.http.post(url, data);
+  }
+
   updateUser(data: any, userId: any): Observable<any> {
     const url = this.apiUrl + '/users/' + userId;
     return this.http.put(url, data);
-  }
-
+  } 
+  
   deleteUser(paramId: number, data: any): Observable<any> {
     const url = this.apiUrl + '/users/' + paramId;
     return this.http.put(url, data);

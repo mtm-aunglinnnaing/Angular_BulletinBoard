@@ -15,11 +15,20 @@ import { PlainModalComponent } from './components/plain-modal/plain-modal.compon
 import { PostListComponent } from './posts/post-list/post-list.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { ListModalComponent } from './components/list-modal/list-modal.component';
-import { UserProfileComponent } from './users/user-profile/user-profile.component';
+import { UserCreateComponent } from './users/user-create/user-create.component';
+import { UserConfirmComponent } from './users/user-confirm/user-confirm.component';
+import { UserUpdateComponent } from './users/user-update/user-update.component';
+import { UserUpdateConfirmComponent } from './users/user-update-confirm/user-update-confirm.component';
 import { PasswordChangeComponent } from './users/password-change/password-change.component';
+import { UserProfileComponent } from './users/user-profile/user-profile.component';
 
 //services
 import { PostService } from './services/post.service';
+import { UsersService } from './services/users.service';
+
+//pipes
+import { PasswordPipe } from './pipes/password.pipe';
+
 
 @NgModule({
   declarations: [
@@ -31,8 +40,13 @@ import { PostService } from './services/post.service';
     PostListComponent,
     UserListComponent,
     ListModalComponent,
+    UserCreateComponent,
+    UserConfirmComponent,
+    UserUpdateComponent,
+    UserUpdateConfirmComponent,
     PasswordChangeComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    PasswordPipe,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +57,10 @@ import { PostService } from './services/post.service';
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [PostService],
+  providers: [
+    PostService,
+    UsersService,
+    PasswordPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
