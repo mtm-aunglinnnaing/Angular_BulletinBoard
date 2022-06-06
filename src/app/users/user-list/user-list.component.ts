@@ -89,21 +89,21 @@ export class UserListComponent implements OnInit {
       next: data => {
         this.eachUser = data;
         const param = {
-          "id": userId,
-          "name": this.eachUser.name,
-          "email": this.eachUser.email,
-          "password": this.eachUser.password,
-          "type": this.eachUser.type,
-          "phone": this.eachUser.phone,
-          "address": this.eachUser.address,
-          "dob": this.eachUser.dob,
-          "created_user_id": this.eachUser.created_user_id,
-          "updated_user_id": this.eachUser.updated_user_id,
-          "deleted_user_id": this.userInfo.id,
-          "created_at": this.eachUser.created_at,
-          "updated_at": this.eachUser.updated_at,
-          "deleted_at": new Date(),
-          "is_removed": true
+          id: userId,
+          name: this.eachUser.name,
+          email: this.eachUser.email,
+          password: this.eachUser.password,
+          type: this.eachUser.type,
+          phone: this.eachUser.phone,
+          address: this.eachUser.address,
+          dob: this.eachUser.dob,
+          created_user_id: this.eachUser.created_user_id,
+          updated_user_id: this.eachUser.updated_user_id,
+          deleted_user_id: this.userInfo.id,
+          created_at: this.eachUser.created_at,
+          updated_at: this.eachUser.updated_at,
+          deleted_at: new Date(),
+          is_removed: true
         };
         this.usersSvc.deleteUser(userId, param).subscribe({
           next: data => {
@@ -120,6 +120,9 @@ export class UserListComponent implements OnInit {
   }
 
   onSearch() {
+    if (!this.nameFilter && !this.emailFilter && !this.fromDate && !this.toDate) {
+      this.getUserData();
+    }
     if (this.nameFilter && !this.emailFilter && !this.fromDate && !this.toDate) {
       //for name filter
       let result = this.orgList.filter((e: any) => {
