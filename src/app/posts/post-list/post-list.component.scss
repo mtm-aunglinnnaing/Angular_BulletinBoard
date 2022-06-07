@@ -5,25 +5,22 @@
 
   .filter {
     display: flex;
-    float: right;
-    width: 48%;
 
     .opr-btn {
       width: 80%;
 
       button {
         margin: 0 1%;
+        padding-right:2.5%;
+        
+        mat-icon {
+          margin-right: 10%;
+        }
       }
     }
   }
 
   table {
     width: 100%;
-
-    .btn-title:hover {
-      cursor: pointer;
-      color: #4350af;
-    }
-    
   }
 }

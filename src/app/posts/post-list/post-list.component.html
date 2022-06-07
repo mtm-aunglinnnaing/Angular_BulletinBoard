@@ -7,8 +7,8 @@
     <div class="opr-btn">
       <button mat-raised-button color="primary" class="btn btn-sm btn-primary ml-1" (click)="applyFilter(input.value)"><mat-icon>search</mat-icon>Search</button>
       <button mat-raised-button color="primary" class="btn btn-sm btn-primary ml-1" (click)="createPost()"><mat-icon>post_add</mat-icon>Add</button>
-      <button mat-raised-button color="primary" (click)="uploadCSV()" class="btn btn-sm btn-primary ml-1">Upload</button>
-      <button mat-raised-button color="primary" class="btn btn-sm btn-primary ml-1" (click)="exporter.exportTable('csv',{fileName:'post-data'})">Download</button>
+      <button mat-raised-button color="primary" (click)="uploadCSV()" class="btn btn-sm btn-primary ml-1"><mat-icon>cloud_upload</mat-icon>Upload</button>
+      <button mat-raised-button color="primary" class="btn btn-sm btn-primary ml-1" (click)="exporter.exportTable('csv',{fileName:'post-data'})"><mat-icon>cloud_download</mat-icon>Download</button>
     </div>
   </div>
 
@@ -17,7 +17,8 @@
     <!-- Post Title -->
     <ng-container matColumnDef="title" >
       <th mat-header-cell *matHeaderCellDef> Post Title </th>
-      <td mat-cell *matCellDef="let row" (click)="titleDetail(row.id)"class="btn-title"> {{row.title}} </td>
+
+      <td mat-cell *matCellDef="let row"><button mat-stroked-button (click)="titleDetail(row.id)" color="primary">{{row.title}} </button></td>
     </ng-container>
 
     <!-- Description -->
