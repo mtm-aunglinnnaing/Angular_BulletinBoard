@@ -122,7 +122,7 @@ export class PostListComponent implements OnInit {
   //post upload
   uploadCSV() {
     let dialogRef = this.dialog.open(UploadCsvComponent, {
-      width: '500px'
+      width: '20%'
     });
 
     dialogRef.afterClosed().subscribe(result => {
