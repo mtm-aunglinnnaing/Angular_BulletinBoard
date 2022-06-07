@@ -7,6 +7,9 @@ import { MatDialog } from '@angular/material/dialog';
 
 //services
 import { PostService } from 'src/app/services/post.service';
+
+//pages
+import { UploadCsvComponent } from '../upload-csv/upload-csv.component';
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
@@ -131,7 +134,17 @@ export class PostListComponent implements OnInit {
           console.log(err);
         }
       });
-    }
+  }
+  
+  uploadCSV() {
+    let dialogRef = this.dialog.open(UploadCsvComponent, {
+      width: '500px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.login();
+    })
+  }
 
 }
 
