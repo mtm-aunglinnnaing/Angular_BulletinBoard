@@ -3,7 +3,7 @@
   <h2 *ngIf="postId">Update Post</h2>
   <form [formGroup]="postForm" (ngSubmit)="confirmPost()" class="post-form">
     <!-- Title -->
-    <mat-form-field appearance="standard" class="form-group">
+    <mat-form-field appearance="outline" class="form-group">
       <mat-label>Title</mat-label>
       <input matInput type="text" formControlName="title" placeholder="Title">
       <mat-error *ngIf="myError('title', 'required')">Title is required</mat-error>
@@ -12,7 +12,7 @@
     <!-- /Title -->
 
     <!-- Description -->
-    <mat-form-field appearance="standard" class="form-group">
+    <mat-form-field appearance="outline" class="form-group">
       <mat-label>Description</mat-label>
       <textarea matInput rows="5" class="description" formControlName="description" placeholder="Description"></textarea>
       <mat-error *ngIf="myError('description', 'required')">Description is required</mat-error>

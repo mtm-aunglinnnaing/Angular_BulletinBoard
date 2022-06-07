@@ -2,19 +2,19 @@
   <h2 class="title">User List</h2>
   <div class="search-blk">
     <!-- Name Search -->
-    <mat-form-field appearance="standard" class="filter">
+    <mat-form-field appearance="outline" class="filter">
       <mat-label>Name</mat-label>
       <input matInput [(ngModel)]="nameFilter" placeholder="Name">
     </mat-form-field>
 
     <!-- Email Search -->
-    <mat-form-field appearance="standard" class="filter">
+    <mat-form-field appearance="outline" class="filter">
       <mat-label>Email</mat-label>
       <input matInput [(ngModel)]="emailFilter" placeholder="Email">
     </mat-form-field>
 
     <!-- Date Search -->
-    <mat-form-field appearance="standard" class="filter">
+    <mat-form-field appearance="outline" class="filter">
       <mat-label>Created From && Created To</mat-label>
       <mat-date-range-input [rangePicker]="campaignOnePicker">
         <input matStartDate [(ngModel)]="fromDate" placeholder="Check-in date">
@@ -25,8 +25,12 @@
     </mat-form-field>
 
     <div class="btn-blk">
-      <button mat-flat-button color="accent" (click)="onSearch()" class="btn-search"><mat-icon>search</mat-icon> Search</button>
-      <button mat-flat-button color="primary" (click)="onClickUserCreate()"><mat-icon>person_add</mat-icon>Add User </button>
+      <button mat-flat-button color="primary" (click)="onSearch()" class="btn-search">
+        <mat-icon>search</mat-icon> Search
+      </button>
+      <button mat-flat-button color="primary" (click)="onClickUserCreate()">
+        <mat-icon>person_add</mat-icon>Add User
+      </button>
     </div>
   </div>
   <!-- /serach-blk -->
@@ -37,7 +41,9 @@
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Name </th>
         <td mat-cell *matCellDef="let user">
-          <button mat-stroked-button (click)="getEachUser(user.id)" color="primary">	<mat-icon>menu</mat-icon> {{user.name}} </button>
+          <button mat-stroked-button (click)="getEachUser(user.id)" color="primary">
+            <mat-icon>menu</mat-icon> {{user.name}}
+          </button>
         </td>
       </ng-container>
 
@@ -62,7 +68,7 @@
       <!-- DOB Column -->
       <ng-container matColumnDef="dob">
         <th mat-header-cell *matHeaderCellDef> Birth Date </th>
-        <td mat-cell *matCellDef="let user"> {{user.dob | date: 'shortDate'}} </td>
+        <td mat-cell *matCellDef="let user"> {{user.dob | date: 'dd/MM/yyyy'}} </td>
       </ng-container>
 
       <!-- Address Column -->
@@ -87,8 +93,12 @@
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef> </th>
         <td mat-cell *matCellDef="let user">
-          <button  mat-icon-button (click)="updateUserData(user.id)" color="accent"><mat-icon>edit</mat-icon></button>
-          <button  mat-icon-button (click)="deleteUserData(user.id)" color="warn"><mat-icon>delete</mat-icon></button>
+          <button mat-icon-button (click)="updateUserData(user.id)" color="primary">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="deleteUserData(user.id)" color="warn">
+            <mat-icon>delete</mat-icon>
+          </button>
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
