@@ -3,8 +3,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatListModule } from '@angular/material/list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -29,8 +29,8 @@ import { MatTableExporterModule } from 'mat-table-exporter';
     MatInputModule,
     MatButtonModule,
     MatCardModule,
-    MatSlideToggleModule,
     MatListModule,
+    MatSlideToggleModule,
     MatSnackBarModule,
     MatDialogModule,
     MatNativeDateModule,
