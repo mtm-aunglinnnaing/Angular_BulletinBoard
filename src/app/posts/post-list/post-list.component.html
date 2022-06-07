@@ -8,11 +8,11 @@
       <button mat-raised-button color="primary" class="btn btn-sm btn-primary ml-1" (click)="applyFilter(input.value)">Search</button>
       <button mat-raised-button color="primary" class="btn btn-sm btn-primary ml-1" (click)="createPost()">Add</button>
       <button mat-raised-button color="primary" class="btn btn-sm btn-primary ml-1">Upload</button>
-      <button mat-raised-button color="primary" class="btn btn-sm btn-primary ml-1">Download</button>
+      <button mat-raised-button color="primary" class="btn btn-sm btn-primary ml-1" (click)="exporter.exportTable('csv',{fileName:'post-data'})">Download</button>
     </div>
   </div>
 
-  <table mat-table mat-Sort [dataSource]="dataSource">
+  <table mat-table mat-Sort matTableExporter [dataSource]="dataSource" #exporter="matTableExporter">
 
     <!-- Post Title -->
     <ng-container matColumnDef="title" >
