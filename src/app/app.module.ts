@@ -30,6 +30,7 @@ import { PasswordPipe } from './pipes/password.pipe';
 
 //services
 import { PostService } from './services/post.service';
+import { PostModalComponent } from './components/post-modal/post-modal.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { PostService } from './services/post.service';
     UserConfirmComponent,
     UserUpdateComponent,
     UserUpdateConfirmComponent,
-    PasswordPipe
+    PasswordPipe,
+    PostModalComponent,
   ],
   imports: [
     BrowserModule,

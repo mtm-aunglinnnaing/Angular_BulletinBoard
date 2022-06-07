@@ -20,14 +20,10 @@
     "@angular/platform-browser": "~13.3.0",
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
-<<<<<<< Updated upstream
     "cdk-table-exporter": "^10.2.4",
     "file-saver": "^2.0.5",
     "json-server": "^0.17.0",
     "mat-table-exporter": "^10.2.4",
-=======
-    "json-server": "^0.17.0",
->>>>>>> Stashed changes
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
