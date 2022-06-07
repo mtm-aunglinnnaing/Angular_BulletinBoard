@@ -1,42 +1,51 @@
 <div class="mat-elevation-z8">
   <div class="filter">
     <mat-form-field apperance="standard">
-      <mat-label>Search User</mat-label>
+      <mat-label>Search Posted</mat-label>
       <input matInput placeholder="Search" type="text" #input>
     </mat-form-field>
     <div class="opr-btn">
       <button mat-raised-button color="primary" class="btn btn-sm btn-primary ml-1" (click)="applyFilter(input.value)">Search</button>
-      <button mat-raised-button color="primary" class="btn btn-sm btn-primary ml-1">Add</button>
-      <button mat-raised-button color="primary" (click)="uploadCSV()" class="btn btn-sm btn-primary ml-1">Upload</button>
-      <button mat-raised-button color="primary" class="btn btn-sm btn-primary ml-1" (click)="exporter.exportTable('csv',{fileName:'post-data'})">Download</button>
+      <button mat-raised-button color="primary" class="btn btn-sm btn-primary ml-1" (click)="createPost()">Add</button>
+      <button mat-raised-button color="primary" class="btn btn-sm btn-primary ml-1">Upload</button>
+      <button mat-raised-button color="primary" class="btn btn-sm btn-primary ml-1">Download</button>
     </div>
   </div>
 
-  <table mat-table mat-Sort matTableExporter [dataSource]="dataSource" #exporter="matTableExporter">
+  <table mat-table mat-Sort [dataSource]="dataSource">
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="title">
+    <!-- Post Title -->
+    <ng-container matColumnDef="title" >
       <th mat-header-cell *matHeaderCellDef> Post Title </th>
-      <td mat-cell *matCellDef="let row"> {{row.title}} </td>
+      <td mat-cell *matCellDef="let row" (click)="titleDetail(row.id)"class="btn-title"> {{row.title}} </td>
     </ng-container>
 
-    <!-- Name Column -->
+    <!-- Description -->
     <ng-container matColumnDef="description">
       <th mat-header-cell *matHeaderCellDef> Post Description </th>
       <td mat-cell *matCellDef="let row"> {{row.description}} </td>
     </ng-container>
 
-    <!-- Weight Column -->
+    <!-- Created User Id -->
     <ng-container matColumnDef="created_user_id">
       <th mat-header-cell *matHeaderCellDef> Posted User </th>
       <td mat-cell *matCellDef="let row"> {{row.created_user_id}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="created_date">
+    <!-- Created Date -->
+    <ng-container matColumnDef="created_at" class="created_at">
       <th mat-header-cell *matHeaderCellDef> Posted Date </th>
-      <td mat-cell *matCellDef="let row"> {{row.created_date}} </td>
+      <td mat-cell *matCellDef="let row"> {{row.created_at | date: 'shortDate'}} </td>
     </ng-container>
+    
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let row">
+        <button  mat-icon-button (click)="editPost(row.id)" color="accent"><mat-icon>edit</mat-icon></button>
+        <button  mat-icon-button (click)="deletePost(row.id)" color="warn"><mat-icon>delete</mat-icon></button>
+      </td>
+    </ng-container>
+
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
