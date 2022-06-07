@@ -44,7 +44,7 @@
     </mat-form-field>
 
     <div class="changePwd" *ngIf="userId">
-      <a [routerLink]="['/password-change']">Change Password</a>
+      <a [routerLink]="['/password-change']" (click)="changePassword()">Change Password</a>
     </div>
 
     <div class="button-group">

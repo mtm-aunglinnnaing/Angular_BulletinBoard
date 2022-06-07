@@ -7,6 +7,7 @@ export class SharingDataService {
 
   postData: any;
   userData: any;
+  userId: any;
   constructor() { }
 
   setPostData(data: any) {
@@ -23,6 +24,14 @@ export class SharingDataService {
 
   getUserData() {
     return this.userData;
+  }
+
+  setUserId(id: any) {
+    this.userId = id;
+  }
+
+  getUserId() {
+    return this.userId;
   }
 
 }
