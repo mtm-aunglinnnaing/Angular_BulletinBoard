@@ -24,7 +24,7 @@ export class PostListComponent implements OnInit {
   public postId: any;
 
   dataSource!: MatTableDataSource<any>;
-  displayedColumns: string[] = ['title', 'description', 'created_user_id', 'created_at', 'action', 'action1'];
+  displayedColumns: string[] = ['title', 'description', 'created_user_id', 'created_at', 'action'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -37,21 +37,10 @@ export class PostListComponent implements OnInit {
 
   login() {
     this.userInfo = JSON.parse(localStorage.getItem('userInfo') || '[]');
-    this.postId = this.route.snapshot.params['id'];
     if (this.userInfo.type === 0) {
       this.getPostData();
     } else {
-        this.postSvc.getPost().subscribe({
-          next: posts => {
-            this.postListDetail = posts.filter((data: any) => {
-              return data.created_user_id === this.userInfo.id && data.is_removed == false;
-            });
-            console.log(this.postListDetail);
-            this.dataSource = new MatTableDataSource(this.postListDetail);
-            this.dataSource.paginator = this.paginator;
-          }
-        });
-        
+      this.getEachPost();
       }
   }
 
@@ -62,6 +51,18 @@ export class PostListComponent implements OnInit {
           return data.is_removed == false;
         });
         this.dataSource = new MatTableDataSource(this.allPost);
+        this.dataSource.paginator = this.paginator;
+      }
+    });
+  }
+  getEachPost() {
+    this.postSvc.getPost().subscribe({
+      next: posts => {
+        this.postListDetail = posts.filter((data: any) => {
+          return data.created_user_id === this.userInfo.id && data.is_removed == false;
+        });
+        console.log(this.postListDetail);
+        this.dataSource = new MatTableDataSource(this.postListDetail);
         this.dataSource.paginator = this.paginator;
       }
     });
@@ -96,7 +97,12 @@ export class PostListComponent implements OnInit {
         }
         this.postSvc.deletePost(postId, param).subscribe({
           next: data => { 
-            this.getPostData();
+            if (this.userInfo.type === 0) {
+              this.getPostData();
+            }
+            else {
+              this.getEachPost();
+            }
           }
         })
       }
