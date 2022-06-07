@@ -1,26 +1,32 @@
-.mat-elevation-z8 {
-  width: 80%;
-  margin: 1% auto;
-  padding: 2%;
+.container {
+  width: 82%;
+  margin: 2% auto;
 
   .filter {
     display: flex;
 
     .opr-btn {
       width: 80%;
+      margin-top: 1.6%;
+      margin-left: 1.4%;
 
       button {
         margin: 0 1%;
-        padding-right:2.5%;
-        
+        padding-right: 2.5%;
+
         mat-icon {
           margin-right: 10%;
         }
       }
     }
   }
-
-  table {
+  .mat-elevation-z8 {
     width: 100%;
+    margin: 1% auto;
+    padding: 2%;
+
+    table {
+      width: 100%;
+    }
   }
 }

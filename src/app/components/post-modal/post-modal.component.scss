@@ -5,13 +5,17 @@
     mat-list-item {
       margin: 2% 0;
       span {
-        width: 20%;
+        width: 28%;
       }
       .dialog-data {
         float: right;
         clear: both;
-        width: 80%;
+        width: 72%;
       }
     }
   }
+}
+.close-btn {
+  float: right !important;
+  clear: both;
 }

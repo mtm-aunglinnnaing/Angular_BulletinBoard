@@ -35,18 +35,19 @@ export class PostListComponent implements OnInit {
 
   ngOnInit(): void {
     this.login();
-    
+
   }
 
+  //user or admin filter
   login() {
     this.userInfo = JSON.parse(localStorage.getItem('userInfo') || '[]');
     if (this.userInfo.type === 0) {
       this.getPostData();
     } else {
       this.getEachPost();
-      }
+    }
   }
-
+  //get all post for admin
   getPostData() {
     this.postSvc.getPost().subscribe({
       next: posts => {
@@ -58,32 +59,33 @@ export class PostListComponent implements OnInit {
       }
     });
   }
+
+  //get user related post
   getEachPost() {
     this.postSvc.getPost().subscribe({
       next: posts => {
         this.postListDetail = posts.filter((data: any) => {
           return data.created_user_id === this.userInfo.id && data.is_removed == false;
         });
-        console.log(this.postListDetail);
         this.dataSource = new MatTableDataSource(this.postListDetail);
         this.dataSource.paginator = this.paginator;
       }
     });
   }
-  
 
+  //post search filter
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim();
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
   }
-  createPost() {
-    this.router.navigate(['/post']);
-  }
+
+  //post edit
   editPost(postId: number) {
-    this.router.navigate(['/post/'+ postId])
+    this.router.navigate(['/post/' + postId])
   }
 
+  //post delete
   deletePost(postId: any) {
     this.postSvc.getPostDetail(postId).subscribe({
       next: data => {
@@ -99,7 +101,7 @@ export class PostListComponent implements OnInit {
           "deleted_at": new Date()
         }
         this.postSvc.deletePost(postId, param).subscribe({
-          next: data => { 
+          next: data => {
             if (this.userInfo.type === 0) {
               this.getPostData();
             }
@@ -112,30 +114,12 @@ export class PostListComponent implements OnInit {
     })
   }
 
-  titleDetail(postId: any) {
-
-      this.postSvc.getPostDetail(postId).subscribe({
-        next: res => {
-          this.eachData = res;
-          this.dialog.open(PostModalComponent, {
-            width: '100%',
-            data: {
-              title: res.title,
-              description: res.description,
-              status: res.status,
-              created_user_id: res.created_user_id,
-              updated_user_id: res.updated_user_id,
-              created_at: res.created_at,
-            }
-          });
-        },
-        error: err => {
-          console.log('=== handle error ===');
-          console.log(err);
-        }
-      });
+  //post create
+  createPost() {
+    this.router.navigate(['/post']);
   }
-  
+
+  //post upload
   uploadCSV() {
     let dialogRef = this.dialog.open(UploadCsvComponent, {
       width: '500px'
@@ -146,6 +130,25 @@ export class PostListComponent implements OnInit {
     })
   }
 
+  //post title details
+  titleDetail(postId: any) {
+    this.postSvc.getPostDetail(postId).subscribe({
+      next: res => {
+        this.eachData = res;
+        this.dialog.open(PostModalComponent, {
+          width: '40%',
+          data: {
+            title: res.title,
+            description: res.description,
+            status: res.status,
+            created_user_id: res.created_user_id,
+            updated_user_id: res.updated_user_id,
+            created_at: res.created_at,
+          }
+        });
+      }
+    });
+  }
 }
 
 
