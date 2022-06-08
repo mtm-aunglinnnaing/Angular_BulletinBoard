@@ -7,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserProfileComponent implements OnInit {
   userInfo: any;
+  type: any;
   constructor() { }
 
   ngOnInit(): void {
     this.userInfo = JSON.parse(localStorage.getItem('userInfo') || '[]');
+
+    if(this.userInfo.type == 0) {
+      this.type = 'Admin';
+    } else {
+      this.type = 'User';
+    }
   }
 
 }
