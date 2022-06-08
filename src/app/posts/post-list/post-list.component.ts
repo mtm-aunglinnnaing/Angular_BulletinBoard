@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 //services
 import { PostService } from 'src/app/services/post.service';
+import { UsersService } from 'src/app/services/users.service';
 
 //pages
 import { UploadCsvComponent } from '../upload-csv/upload-csv.component';
@@ -31,7 +32,12 @@ export class PostListComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private postSvc: PostService, private router: Router, public dialog: MatDialog, private route: ActivatedRoute) { }
+  constructor(
+    private postSvc: PostService,
+    private userSvc: UsersService,
+    private router: Router,
+    public dialog: MatDialog,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.login();
@@ -53,6 +59,11 @@ export class PostListComponent implements OnInit {
     this.postSvc.getPost().subscribe({
       next: posts => {
         this.allPost = posts.filter((data: any) => {
+          this.userSvc.getUserDetail(data.created_user_id).subscribe({
+            next: user => {
+              data.user_name = user.name;
+            }
+          });
           return data.is_removed == false;
         });
         this.dataSource = new MatTableDataSource(this.allPost);
@@ -66,6 +77,11 @@ export class PostListComponent implements OnInit {
     this.postSvc.getPost().subscribe({
       next: posts => {
         this.postListDetail = posts.filter((data: any) => {
+          this.userSvc.getUserDetail(data.created_user_id).subscribe({
+            next: user => {
+              data.user_name = user.name;
+            }
+          });
           return data.created_user_id === this.userInfo.id && data.is_removed == false;
         });
         this.dataSource = new MatTableDataSource(this.postListDetail);
