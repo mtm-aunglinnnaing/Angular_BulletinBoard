@@ -134,6 +134,8 @@ export class UserListComponent implements OnInit {
   }
 
   onSearch() {
+    this.toDate.setTime(this.toDate.getTime() + ((23 * 60 + 59) * 60 + 59) * 1000);
+
     if (!this.nameFilter && !this.emailFilter && !this.fromDate && !this.toDate) {
       this.getUserData();
     }
@@ -153,12 +155,8 @@ export class UserListComponent implements OnInit {
     else if (!this.nameFilter && !this.emailFilter && this.fromDate && this.toDate) {
       //for date filter
       let result = this.orgList.filter((e: any) => {
-        return new Date(e.created_at).getDate() >= this.fromDate.getDate()
-          && new Date(e.created_at).getDate() <= this.toDate.getDate()
-          && new Date(e.created_at).getMonth() >= this.fromDate.getMonth()
-          && new Date(e.created_at).getMonth() <= this.toDate.getMonth()
-          && new Date(e.created_at).getFullYear() >= this.fromDate.getFullYear()
-          && new Date(e.created_at).getFullYear() <= this.toDate.getFullYear();
+        return new Date(e.created_at) >= this.fromDate
+          && new Date(e.created_at) <= this.toDate
       });
       this.dataSource = new MatTableDataSource(result);
     } else if (this.nameFilter && this.emailFilter && !this.fromDate && !this.toDate) {
@@ -172,12 +170,8 @@ export class UserListComponent implements OnInit {
       //for name and date filter
       let result = this.orgList.filter((e: any) => {
         return e.name.trim().toLowerCase().includes(this.nameFilter)
-          && new Date(e.created_at).getDate() >= this.fromDate.getDate()
-          && new Date(e.created_at).getDate() <= this.toDate.getDate()
-          && new Date(e.created_at).getMonth() >= this.fromDate.getMonth()
-          && new Date(e.created_at).getMonth() <= this.toDate.getMonth()
-          && new Date(e.created_at).getFullYear() >= this.fromDate.getFullYear()
-          && new Date(e.created_at).getFullYear() <= this.toDate.getFullYear();
+          && new Date(e.created_at) >= this.fromDate
+          && new Date(e.created_at) <= this.toDate
       });
       this.dataSource = new MatTableDataSource(result);
     }
@@ -185,12 +179,9 @@ export class UserListComponent implements OnInit {
       //for email and date filter
       let result = this.orgList.filter((e: any) => {
         return e.email.includes(this.emailFilter)
-          && new Date(e.created_at).getDate() >= this.fromDate.getDate()
-          && new Date(e.created_at).getDate() <= this.toDate.getDate()
+          && new Date(e.created_at) >= this.fromDate
+          && new Date(e.created_at) <= this.toDate
           && new Date(e.created_at).getMonth() >= this.fromDate.getMonth()
-          && new Date(e.created_at).getMonth() <= this.toDate.getMonth()
-          && new Date(e.created_at).getFullYear() >= this.fromDate.getFullYear()
-          && new Date(e.created_at).getFullYear() <= this.toDate.getFullYear();
       });
       this.dataSource = new MatTableDataSource(result);
     }
@@ -199,8 +190,8 @@ export class UserListComponent implements OnInit {
       let result = this.orgList.filter((e: any) => {
         return e.name.trim().toLowerCase().includes(this.nameFilter)
           && e.email.includes(this.emailFilter)
-          && new Date(e.created_at).getDate() >= this.fromDate.getDate()
-          && new Date(e.created_at).getDate() <= this.toDate.getDate()
+          && new Date(e.created_at) >= this.fromDate
+          && new Date(e.created_at) <= this.toDate
           && new Date(e.created_at).getMonth() >= this.fromDate.getMonth()
           && new Date(e.created_at).getMonth() <= this.toDate.getMonth()
           && new Date(e.created_at).getFullYear() >= this.fromDate.getFullYear()
