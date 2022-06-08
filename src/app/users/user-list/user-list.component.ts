@@ -66,7 +66,7 @@ export class UserListComponent implements OnInit {
       next: res => {
         this.eachUser = res;
         this.dialog.open(ListModalComponent, {
-          width: '300px',
+          width: '600px',
           data: {
             name: res.name,
             email: res.email,

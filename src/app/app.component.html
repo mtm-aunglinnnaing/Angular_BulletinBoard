@@ -5,8 +5,12 @@
     <a mat-flat-button color="primary" *ngIf="user?.id && user?.type === 1" [routerLink]="['/user-profile']" routerLinkActive="active">User</a>
     <a mat-flat-button color="primary" [routerLink]="['/post-list']" routerLinkActive="active">Posts</a>
     <span class="rt-nav">
-      <a mat-flat-button color="accent" *ngIf="user?.id" class="profile" [routerLink]="['/user-profile']"><mat-icon>person</mat-icon>{{user.name}}</a>
-      <a mat-flat-button color="warn" (click)="logout()"><mat-icon>exit_to_app</mat-icon>Logout</a>
+      <a mat-button *ngIf="user?.id" class="profile" [routerLink]="['/user-profile']">
+        <mat-icon>person</mat-icon>{{user.name}}
+      </a>
+      <a mat-flat-button color="warn" (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>Logout
+      </a>
     </span>
   </div>
 </mat-toolbar>

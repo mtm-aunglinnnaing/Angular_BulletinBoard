@@ -29,28 +29,10 @@
       <td class="label">Address</td>
       <td>{{userInfo.address}}</td>
     </tr>
+    <tr>
+      <td class="change-btn" colspan="2">
+        <a mat-stroked-button color="warn" [routerLink]="['/password-change']">Change Password</a>
+      </td>
+    </tr>
   </table>
-  <!--<mat-list role="list">
-    <mat-list-item role="listitem">
-      <span></span> 
-    </mat-list-item>
-    <mat-list-item role="listitem">
-      <span></span> 
-    </mat-list-item>
-    <mat-list-item role="listitem">
-      <span>Password</span>
-    </mat-list-item>
-    <mat-list-item role="listitem">
-      <span>Type</span> {{userInfo.type}}
-    </mat-list-item>
-    <mat-list-item role="listitem">
-      <span>Phone</span> {{userInfo.phone}}
-    </mat-list-item>
-    <mat-list-item role="listitem">
-      <span>Date Of Birth</span> {{userInfo.dob}}
-    </mat-list-item>
-    <mat-list-item role="listitem">
-      <span>Address</span> {{userInfo.address}}
-    </mat-list-item>
-  </mat-list>-->
 </div>
