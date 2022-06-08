@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostModalComponent } from 'src/app/components/post-modal/post-modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 //services
 import { PostService } from 'src/app/services/post.service';
@@ -37,6 +38,7 @@ export class PostListComponent implements OnInit {
     private userSvc: UsersService,
     private router: Router,
     public dialog: MatDialog,
+    private snackBar: MatSnackBar,
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -120,9 +122,11 @@ export class PostListComponent implements OnInit {
         this.postSvc.deletePost(postId, param).subscribe({
           next: data => {
             if (this.userInfo.type === 0) {
+              this.snackBar.open('Post Deleted Successfully!', '', { duration: 3000 });
               this.getPostData();
             }
             else {
+              this.snackBar.open('Post Deleted Successfully!', '', { duration: 3000 });
               this.getEachPost();
             }
           }
