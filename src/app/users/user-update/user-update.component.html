@@ -2,27 +2,27 @@
   <h2>Update User</h2>
   <form [formGroup]="userForm" (ngSubmit)="confirmUser()" class="user-form">
 
-    <mat-form-field class="form-group">
+    <mat-form-field appearance="outline" class="form-group">
       <mat-label>Name</mat-label>
       <input matInput type="text" formControlName="name" placeholder="Name">
       <mat-error *ngIf="myForm['name'].hasError('required')">Name is required</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="form-group">
+    <mat-form-field appearance="outline" class="form-group">
       <mat-label>Email Address</mat-label>
       <input matInput type="email" formControlName="email" placeholder="Email Address">
       <mat-error *ngIf="myForm['email'].hasError('required')">Email address is required</mat-error>
       <mat-error *ngIf="myForm['email'].hasError('pattern')">Please enter a valid email</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="form-group">
+    <mat-form-field appearance="outline" class="form-group">
       <mat-label>Type</mat-label>
       <mat-select matNativeControl name="type" formControlName="type" required>
         <mat-option *ngFor="let selectOption of typeOption" [value]="selectOption.value"> {{selectOption.label}}</mat-option>
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field class="form-group">
+    <mat-form-field appearance="outline" class="form-group">
       <mat-label>Phone</mat-label>
       <input matInput type="text" (keypress)="keyPress($event)" formControlName="phone" placeholder="Phone">
       <mat-error *ngIf="myForm['phone'].hasError('required')">Phone is required</mat-error>
@@ -30,15 +30,14 @@
         Phone number must be start with 09 and 11 digits</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="form-group">
+    <mat-form-field appearance="outline" class="form-group">
       <mat-label>Date Of Birth</mat-label>
       <input matInput [matDatepicker]="picker1" formControlName="dob">
-      <mat-hint>DD/MM/YYYY</mat-hint>
       <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
       <mat-datepicker #picker1></mat-datepicker>
     </mat-form-field>
 
-    <mat-form-field class="form-group">
+    <mat-form-field appearance="outline" class="form-group">
       <mat-label>Address</mat-label>
       <textarea matInput formControlName="address"></textarea>
     </mat-form-field>
