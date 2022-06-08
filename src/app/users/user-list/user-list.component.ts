@@ -167,7 +167,9 @@ export class UserListComponent implements OnInit {
     else if (this.nameFilter && !this.emailFilter && this.fromDate && this.toDate) {
       //for name and date filter
       let result = this.orgList.filter((e: any) => {
-        return e.name.trim().toLowerCase().includes(this.nameFilter) && new Date(e.created_at) >= this.fromDate && new Date(e.created_at) <= this.toDate;
+        return e.name.trim().toLowerCase().includes(this.nameFilter)
+          && new Date(e.created_at).getDate() >= this.fromDate.getDate()
+          && new Date(e.created_at).getDate() <= this.toDate.getDate();
       });
       this.dataSource = new MatTableDataSource(result);
     }
