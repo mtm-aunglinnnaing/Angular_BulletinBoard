@@ -24,11 +24,11 @@ import { AuthGuard } from './guards/auth.guard';
 const routes: Routes = [
   { path: '', component: UserLoginComponent },
   { path: 'login', component: UserLoginComponent },
-  { path: 'post-list', component: PostListComponent },
+  { path: 'post-list', component: PostListComponent, canActivate: [AuthGuard] },
   { path: 'post', component: PostCreateComponent, canActivate: [AuthGuard] },
   { path: 'post/:id', component: PostCreateComponent, resolve: { post: PostResolver }, canActivate: [AuthGuard] },
   { path: 'post-confirm', component: PostConfirmComponent, canActivate: [AuthGuard] },
-  { path: 'user-list', component: UserListComponent },
+  { path: 'user-list', component: UserListComponent, canActivate: [AuthGuard] },
   { path: 'user', component: UserCreateComponent, canActivate: [AuthGuard] },
   { path: 'user-confirm', component: UserConfirmComponent, canActivate: [AuthGuard] },
   { path: 'user/:id', component: UserUpdateComponent, canActivate: [AuthGuard], resolve: { user: UserResolver } },

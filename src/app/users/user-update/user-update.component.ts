@@ -85,4 +85,7 @@ export class UserUpdateComponent implements OnInit {
     this.userForm.reset();
   }
 
+  changePassword() {
+    this.shareDataSvc.setUserId(this.activatedRoute.snapshot.params['id']);
+  }
 }
