@@ -73,6 +73,7 @@ export class UserConfirmComponent implements OnInit {
       };
       this.userSvc.createUser(data).subscribe({
         next: result => {
+          this.shareDataSvc.setUserData(null);
         },
         error: err => {
           console.log('=== handle error ====')

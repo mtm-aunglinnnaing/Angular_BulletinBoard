@@ -87,11 +87,12 @@ export class UserUpdateConfirmComponent implements OnInit {
       deleted_user_id: this.userInfo.id,
       created_at: this.userListDetail.created_at,
       updated_at: new Date(),
-      is_removed: 'false'
+      is_removed: false
     };
     this.userSvc.updateUser(data, this.userId)
       .subscribe({
         next: result => {
+          this.shareDataSvc.setUserData(null);
         },
         error: err => {
           console.log('=== handle error ====')

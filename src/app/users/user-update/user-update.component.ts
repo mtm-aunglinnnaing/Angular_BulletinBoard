@@ -54,6 +54,24 @@ export class UserUpdateComponent implements OnInit {
         address: this.existingUser.address,
       });
     }
+    this.getUserData();
+  }
+
+  getUserData() {
+    const data = this.shareDataSvc.getUserData();
+    this.userDetail = data;
+    if (this.userDetail) {
+      this.userForm.setValue({
+        name: this.userDetail.name,
+        email: this.userDetail.email,
+        password: this.userDetail.password,
+        confirmPwd: this.userDetail.confirmPwd,
+        type: this.userDetail.type,
+        phone: this.userDetail.phone,
+        dob: this.userDetail.dob,
+        address: this.userDetail.address,
+      });
+    }
   }
 
   get myForm() {

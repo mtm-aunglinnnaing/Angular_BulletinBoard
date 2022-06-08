@@ -55,14 +55,14 @@ export class UserCreateComponent implements OnInit {
     this.userDetail = data;
     if (this.userDetail) {
       this.userForm.setValue({
-        name: this.userDetail.name,
-        email: this.userDetail.email,
-        password: this.userDetail.password,
-        confirmPwd: this.userDetail.confirmPwd,
-        type: this.userDetail.type,
-        phone: this.userDetail.phone,
-        dob: this.userDetail.dob,
-        address: this.userDetail.address,
+        name: this.userDetail.name ?? null,
+        email: this.userDetail.email ?? null,
+        password: this.userDetail.password ?? null,
+        confirmPwd: this.userDetail.confirmPwd ?? null,
+        type: this.userDetail.type ?? null,
+        phone: this.userDetail.phone ?? null,
+        dob: this.userDetail.dob ?? null,
+        address: this.userDetail.address ?? null,
       });
     }
   }
