@@ -21,6 +21,7 @@ export class PasswordChangeComponent implements OnInit {
   userInfo: any;
   userId: any;
   eachUser: any;
+  password: any;
   constructor(
     private fb: FormBuilder,
     private usersSvc: UsersService,
@@ -39,6 +40,11 @@ export class PasswordChangeComponent implements OnInit {
       });
     this.userInfo = JSON.parse(localStorage.getItem('userInfo') || '[]');
     this.userId = this.shareDataSvc.getUserId();
+    this.usersSvc.getUserDetail(this.userInfo.id).subscribe({
+      next: result => {
+        this.password = result.password;
+      }
+    });
     if (this.userId) {
       this.getUserData();
     }
@@ -86,7 +92,7 @@ export class PasswordChangeComponent implements OnInit {
         this.snackBar.open('Password Change Successfully!', '', { duration: 3000 });
       }
     } else {
-      if (this.userInfo.password !== formValue.oldPassword) {
+      if (this.password !== formValue.oldPassword) {
         this.snackBar.open('Incorrect Password!', '', { duration: 3000 });
       } else {
         const data = {
@@ -108,7 +114,7 @@ export class PasswordChangeComponent implements OnInit {
         }
         this.usersSvc.updateUser(data, this.userInfo.id).subscribe({
           next: result => {
-            this.router.navigate(['user-list']);
+            this.router.navigate(['user-profile']);
           }
         });
         this.snackBar.open('Password Change Successfully!', '', { duration: 3000 });

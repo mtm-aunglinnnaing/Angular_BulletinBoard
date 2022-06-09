@@ -97,6 +97,7 @@ export class PostConfirmComponent implements OnInit {
         this.postSvc.updatePost(data, this.postId)
           .subscribe({
             next: result => {
+              this.shareDataSvc.setPostData(null);
               this.router.navigate(['/post-list']);
             },
             error: err => {
@@ -119,6 +120,7 @@ export class PostConfirmComponent implements OnInit {
         };
         this.postSvc.createPost(data).subscribe({
           next: result => {
+            this.shareDataSvc.setPostData(null);
             this.router.navigate(['/post-list']);
           },
           error: err => {

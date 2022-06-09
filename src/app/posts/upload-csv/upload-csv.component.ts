@@ -74,7 +74,7 @@ export class UploadCsvComponent implements OnInit {
         //alert(this.duplicateTitle.length);
 
         if (this.duplicateTitle.length > 0) {
-          const csvTitle = this.duplicateTitle.map((item: any)=> item.title)
+          const csvTitle = this.duplicateTitle.map((item: any) => item.title)
           this.dialog.open(PlainModalComponent, {
             data: {
               content: `${csvTitle} already exists in the post list!`,
