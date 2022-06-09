@@ -61,6 +61,8 @@ export class UserListComponent implements OnInit {
           });
           return result.is_removed === false;
         })
+        this.orgList.sort((a: any, b: any) => a.order_key > b.order_key ? 1 : -1);
+        this.userList.sort((a: any, b: any) => a.order_key > b.order_key ? 1 : -1);
         this.dataSource = new MatTableDataSource(this.userList);
         this.dataSource.paginator = this.paginator;
       },
