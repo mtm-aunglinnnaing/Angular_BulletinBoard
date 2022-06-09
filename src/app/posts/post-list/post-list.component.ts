@@ -49,7 +49,7 @@ export class PostListComponent implements OnInit {
   //user or admin filter
   login() {
     this.userInfo = JSON.parse(localStorage.getItem('userInfo') || '[]');
-    if (this.userInfo.type === 0) {
+    if (this.userInfo.type === 0 ) {
       this.getPostData();
     } else {
       this.getEachPost();
@@ -66,7 +66,7 @@ export class PostListComponent implements OnInit {
               data.user_name = user.name;
             }
           });
-          return data.is_removed == false;
+          return data.is_removed == false && data.status === 1;
         });
         this.dataSource = new MatTableDataSource(this.allPost);
         this.dataSource.paginator = this.paginator;
@@ -84,7 +84,7 @@ export class PostListComponent implements OnInit {
               data.user_name = user.name;
             }
           });
-          return data.created_user_id === this.userInfo.id && data.is_removed == false;
+          return data.created_user_id === this.userInfo.id && data.is_removed == false && data.status === 1;
         });
         this.dataSource = new MatTableDataSource(this.postListDetail);
         this.dataSource.paginator = this.paginator;
