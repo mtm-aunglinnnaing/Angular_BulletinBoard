@@ -68,7 +68,7 @@
       <!-- DOB Column -->
       <ng-container matColumnDef="dob">
         <th mat-header-cell *matHeaderCellDef> Birth Date </th>
-        <td mat-cell *matCellDef="let user"> {{user.dob | date: 'dd/MM/yyyy'}} </td>
+        <td mat-cell *matCellDef="let user"> {{user.dob | date: 'shortDate'}} </td>
       </ng-container>
 
       <!-- Address Column -->
@@ -80,13 +80,13 @@
       <!-- Created Date Column -->
       <ng-container matColumnDef="created_at">
         <th mat-header-cell *matHeaderCellDef> Created Date </th>
-        <td mat-cell *matCellDef="let user"> {{user.created_at | date: 'dd/MM/yyyy'}} </td>
+        <td mat-cell *matCellDef="let user"> {{user.created_at | date: 'shortDate'}} </td>
       </ng-container>
 
       <!-- Updated Date Column -->
       <ng-container matColumnDef="updated_at">
         <th mat-header-cell *matHeaderCellDef> Updated Date </th>
-        <td mat-cell *matCellDef="let user"> {{user.updated_at | date: 'dd/MM/yyyy'}} </td>
+        <td mat-cell *matCellDef="let user"> {{user.updated_at | date: 'shortDate'}} </td>
       </ng-container>
 
       <!-- Delete Column -->
@@ -106,6 +106,6 @@
 
     </table>
 
-    <mat-paginator  [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
   </div>
 </div>

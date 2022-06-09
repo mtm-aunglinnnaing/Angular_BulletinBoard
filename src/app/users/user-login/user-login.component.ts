@@ -41,7 +41,6 @@ export class UserLoginComponent implements OnInit {
 
   login() {
     this.usersSvc.getUser().subscribe(res => {
-      console.log(res)
       const user = res.find((a: any) => {
         return a.email === this.loginForm.value.email && a.password === this.loginForm.value.password;
       });

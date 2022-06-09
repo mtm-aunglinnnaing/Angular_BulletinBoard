@@ -1,4 +1,4 @@
-export class CSVRecord {  
-  public title: any;  
-  public description: any;    
+export class CSVRecord {
+  public title: any;
+  public description: any;
 }   

@@ -55,7 +55,7 @@ export class PostListComponent implements OnInit {
       this.getEachPost();
     }
   }
-  
+
   //get all post for admin
   getPostData() {
     this.postSvc.getPost().subscribe({

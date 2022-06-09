@@ -13,7 +13,7 @@ export class PostModalComponent implements OnInit {
   created_user_id?: string;
   updated_user_id?: string;
   created_at?: string;
-  
+
   constructor(
     public dialogRef: MatDialogRef<PostModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: PostModalComponent,
