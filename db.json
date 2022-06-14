@@ -282,10 +282,68 @@
       "created_user_id": 1,
       "updated_user_id": 1,
       "created_at": "2022-06-08T03:44:59.663Z",
-      "updated_at": "2022-06-08T03:44:59.663Z",
+      "updated_at": "2022-06-09T07:56:06.415Z",
       "deleted_at": "",
       "is_removed": false,
       "id": 24
+    },
+    {
+      "title": "Post 115",
+      "description": "Description 115",
+      "status": 1,
+      "created_user_id": 1,
+      "updated_user_id": 1,
+      "created_at": "2022-06-09T07:53:12.168Z",
+      "is_removed": false,
+      "deleted_at": "2022-06-09T07:58:22.148Z",
+      "id": 25
+    },
+    {
+      "title": "Post 266",
+      "description": "Description 266",
+      "status": 1,
+      "created_user_id": 1,
+      "updated_user_id": 1,
+      "created_at": "2022-06-09T07:54:10.562Z",
+      "is_removed": false,
+      "deleted_at": "2022-06-09T07:56:37.421Z",
+      "id": 26
+    },
+    {
+      "title": "Post CSV 02",
+      "description": "Description CSV 02",
+      "status": 1,
+      "created_user_id": 1,
+      "updated_user_id": 1,
+      "created_at": "2022-06-09T07:57:20.720Z",
+      "updated_at": "2022-06-09T07:57:20.720Z",
+      "deleted_at": "",
+      "is_removed": false,
+      "id": 27
+    },
+    {
+      "title": "Post CSV 03",
+      "description": "Description CSV 03",
+      "status": 1,
+      "created_user_id": 1,
+      "updated_user_id": 1,
+      "created_at": "2022-06-09T07:57:20.720Z",
+      "updated_at": "2022-06-09T07:57:20.720Z",
+      "deleted_at": "",
+      "is_removed": false,
+      "id": 28
+    },
+    {
+      "title": "Post CSV 04",
+      "description": "Description CSV 04",
+      "status": 1,
+      "created_user_id": 1,
+      "updated_user_id": 1,
+      "created_at": "2022-06-09T07:57:20.719Z",
+      "updated_at": "2022-06-09T07:57:44.431Z",
+      "deleted_at": "",
+      "is_removed": false,
+      "id": 29
     }
   ],
   "users": [
