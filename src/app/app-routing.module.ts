@@ -25,6 +25,7 @@ const routes: Routes = [
   { path: '', component: UserLoginComponent },
   { path: 'login', component: UserLoginComponent },
   { path: 'post-list', component: PostListComponent, canActivate: [AuthGuard] },
+  // { path: 'post-list', component: PostListComponent },
   { path: 'post', component: PostCreateComponent, canActivate: [AuthGuard] },
   { path: 'post/:id', component: PostCreateComponent, resolve: { post: PostResolver }, canActivate: [AuthGuard] },
   { path: 'post-confirm', component: PostConfirmComponent, canActivate: [AuthGuard] },

@@ -12,6 +12,7 @@ import { UsersService } from 'src/app/services/users.service';
 
 //pages
 import { UploadCsvComponent } from '../upload-csv/upload-csv.component';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
@@ -24,12 +25,16 @@ export class PostListComponent implements OnInit {
   public allPost: any = [];
   public eachPost: any = [];
   public eachData: any = [];
-  public userInfo: any = [];
+  // public userInfo: any = [];
+  public role: any = [];
   public postListDetail: any = [];
   public postId: any;
+  public posts: any = [];
+  public searchText: string = '';
+  public user: any;
 
   dataSource!: MatTableDataSource<any>;
-  displayedColumns: string[] = ['title', 'description', 'created_user_id', 'created_at', 'action'];
+  displayedColumns: string[] = ['title', 'description', 'username', 'created_at', 'action'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -39,17 +44,25 @@ export class PostListComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private authSvc: AuthService) { }
 
   ngOnInit(): void {
-    this.login();
-
+    // console.log('----hi----');
+    // console.log(localStorage.getItem('role'));
+    // console.log(localStorage.getItem('username'));
+    this.role = localStorage.getItem('role');
+    this.authSvc.role.next(this.role);
+    this.authSvc.role.subscribe((data: string | null) => {
+      this.role = data;
+    });
+    this.postData();
+    console.log(this.role);
   }
 
   //user or admin filter
-  login() {
-    this.userInfo = JSON.parse(localStorage.getItem('userInfo') || '[]');
-    if (this.userInfo.type === 0) {
+  postData() {
+    if (this.role === 'authenticated') {
       this.getPostData();
     } else {
       this.getEachPost();
@@ -59,46 +72,73 @@ export class PostListComponent implements OnInit {
   //get all post for admin
   getPostData() {
     this.postSvc.getPost().subscribe({
-      next: posts => {
-        this.allPost = posts.filter((data: any) => {
-          this.userSvc.getUserDetail(data.created_user_id).subscribe({
-            next: user => {
-              data.user_name = user.name;
-            }
-          });
-          return data.is_removed == false && data.status === 1;
-        });
-        this.allPost.sort((a: any, b: any) => a.order_key > b.order_key ? 1 : -1);
-        this.dataSource = new MatTableDataSource(this.allPost);
+      next: (posts: any) => {
+        this.posts = posts.data;
+        console.log(posts.data);
+        console.log(posts.data.attributes);
+        this.dataSource = new MatTableDataSource(posts.data);
         this.dataSource.paginator = this.paginator;
+        // this.allPost = posts.filter((data: any) => {
+        //   this.userSvc.getUserDetail(data.created_user_id).subscribe({
+        //     next: user => {
+        //       data.user_name = user.name;
+        //     }
+        //   });
+        //   return data.is_removed == false && data.status === 1;
+        // });
+        // this.allPost.sort((a: any, b: any) => a.order_key > b.order_key ? 1 : -1);
+        // this.dataSource = new MatTableDataSource(this.allPost);
+        // this.dataSource.paginator = this.paginator;
       }
     });
   }
 
   //get user related post
   getEachPost() {
-    this.postSvc.getPost().subscribe({
-      next: posts => {
-        this.postListDetail = posts.filter((data: any) => {
-          this.userSvc.getUserDetail(data.created_user_id).subscribe({
-            next: user => {
-              data.user_name = user.name;
-            }
-          });
-          return data.created_user_id === this.userInfo.id && data.is_removed == false && data.status === 1;
-        });
-        this.postListDetail.sort((a: any, b: any) => a.order_key < b.order_key ? 1 : -1);
-        this.dataSource = new MatTableDataSource(this.postListDetail);
+    this.postId = localStorage.getItem('id');
+    this.authSvc.id.next(this.postId);
+    this.authSvc.id.subscribe((data: string | null) => {
+      this.postId = data;
+    });
+    // const loginUser = JSON.parse(localStorage.getItem('loginUser') || '[]');
+    // console.log(JSON.parse(loginUser.id));
+
+    // this.postId = localStorage.getItem('id');
+
+    // this.postSvc.getPost().subscribe({
+    //   next: posts => {
+    //     this.postListDetail = posts.filter((data: any) => {
+    //       this.userSvc.getUserDetail(data.created_user_id).subscribe({
+    //         next: user => {
+    //           data.user_name = user.name;
+    //         }
+    //       });
+    //       return data.created_user_id === this.userInfo.id && data.is_removed == false && data.status === 1;
+    //     });
+    //     this.postListDetail.sort((a: any, b: any) => a.order_key < b.order_key ? 1 : -1);
+    //     this.dataSource = new MatTableDataSource(this.postListDetail);
+    //     this.dataSource.paginator = this.paginator;
+    //   }
+    // });
+    // const id = localStorage.getItem('id');
+    this.postSvc.getPostDetail(this.postId).subscribe({
+      next: (posts: any) => {
+        this.posts = posts.data;
+        console.log(posts.data);
+        this.dataSource = new MatTableDataSource(posts.data);
         this.dataSource.paginator = this.paginator;
+        // this.userSvc.getEachUser()
+        // this.postListDetail 
+        // posts.data.map((res:any, ind:any) => {
+
+        // })
+        // console.log(posts.data.attributes.user.data.id)
+        // this.dataSource = new MatTableDataSource(posts.data);
+      },
+      error: err => {
+        console.log(err);
       }
     });
-  }
-
-  //post search filter
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim();
-    filterValue = filterValue.toLowerCase();
-    this.dataSource.filter = filterValue;
   }
 
   //post edit
@@ -107,34 +147,76 @@ export class PostListComponent implements OnInit {
   }
 
   //post delete
+  // deletePost(postId: any) {
+  //   // this.postSvc.getPostDetail(postId).subscribe({
+  //   //   next: data => {
+  //   //     this.eachData = data;
+  //   //     const param = {
+  //   //       "title": this.eachData.title,
+  //   //       "description": this.eachData.description,
+  //   //       "status": this.eachData.status,
+  //   //       "created_user_id": this.eachData.created_user_id,
+  //   //       "updated_user_id": this.eachData.updated_user_id,
+  //   //       "created_at": this.eachData.created_at,
+  //   //       "is_removed": true,
+  //   //       "deleted_at": new Date()
+  //   //     }
+  //   //     this.postSvc.deletePost(postId, param).subscribe({
+  //   //       next: data => {
+  //   //         if (this.userInfo.type === 0) {
+  //   //           this.snackBar.open('Post Deleted Successfully!', '', { duration: 3000 });
+  //   //           this.getPostData();
+  //   //         }
+  //   //         else {
+  //   //           this.snackBar.open('Post Deleted Successfully!', '', { duration: 3000 });
+  //   //           this.getEachPost();
+  //   //         }
+  //   //       }
+  //   //     })
+  //   //   }
+  //   // })
+  // }
+
   deletePost(postId: any) {
-    this.postSvc.getPostDetail(postId).subscribe({
-      next: data => {
-        this.eachData = data;
-        const param = {
-          "title": this.eachData.title,
-          "description": this.eachData.description,
-          "status": this.eachData.status,
-          "created_user_id": this.eachData.created_user_id,
-          "updated_user_id": this.eachData.updated_user_id,
-          "created_at": this.eachData.created_at,
-          "is_removed": true,
-          "deleted_at": new Date()
+    const confirm = window.confirm('Are you sure want to delete?');
+    if (confirm === true) {
+      const param = {
+        "data": {
+          "status": false
         }
-        this.postSvc.deletePost(postId, param).subscribe({
-          next: data => {
-            if (this.userInfo.type === 0) {
-              this.snackBar.open('Post Deleted Successfully!', '', { duration: 3000 });
-              this.getPostData();
-            }
-            else {
-              this.snackBar.open('Post Deleted Successfully!', '', { duration: 3000 });
-              this.getEachPost();
-            }
-          }
-        })
       }
-    })
+      this.postSvc.deletePost(postId, param).subscribe({
+        next: res => {
+          console.log('success');
+          this.getPostData();
+        },
+        error: err => {
+          console.log(err);
+        }
+      })
+    }
+
+
+    // this.postSvc.getEachPost(postId).subscribe({
+    //   next: data => {
+    //     this.eachData = data;
+    //     const param = {
+    //       "status": false,
+    //     }
+    //     this.postSvc.deletePost(postId, param).subscribe({
+    //       next: data => {
+    //         // if (this.userInfo.type === 0) {
+    //         //   this.snackBar.open('Post Deleted Successfully!', '', { duration: 3000 });
+    //         //   this.getPostData();
+    //         // }
+    //         // else {
+    //         //   this.snackBar.open('Post Deleted Successfully!', '', { duration: 3000 });
+    //         //   this.getEachPost();
+    //         // }
+    //       }
+    //     })
+    //   }
+    // })
   }
 
   //post create
@@ -147,31 +229,39 @@ export class PostListComponent implements OnInit {
     let dialogRef = this.dialog.open(UploadCsvComponent, {
       width: '40%'
     });
-
     dialogRef.afterClosed().subscribe(result => {
-      this.login();
+      this.postData();
     })
   }
 
   //post title details
   titleDetail(postId: any) {
-    this.postSvc.getPostDetail(postId).subscribe({
-      next: res => {
-        this.eachData = res;
+    this.postSvc.getEachPost(postId).subscribe({
+      next: (res: any) => {
         this.dialog.open(PostModalComponent, {
-          width: '40%',
+          width: '35%',
           data: {
-            title: res.title,
-            description: res.description,
-            status: res.status,
-            created_user_id: res.created_user_id,
-            updated_user_id: res.updated_user_id,
-            created_at: res.created_at,
+            title: res.data.attributes.title,
+            description: res.data.attributes.description,
+            created_user_id: res.data.attributes.user.data.id,
+            // // updated_user_id: res.updated_user_id,
+            created_at: res.data.attributes.createdAt
           }
         });
       }
     });
   }
+
+  //post search filter
+  applyFilter() {
+    console.log(this.posts);
+    let result = this.posts.filter((e: any) => {
+      return e.attributes.title.trim().toLowerCase().includes(this.searchText.trim().toLowerCase()) || e.attributes.description.trim().toLowerCase().includes(this.searchText.trim().toLowerCase());
+    });
+    this.dataSource = new MatTableDataSource(result);
+    this.dataSource.paginator = this.paginator;
+  }
+
 }
 
 

@@ -28,7 +28,7 @@
       <button mat-flat-button color="primary" (click)="onSearch()" class="btn-search">
         <mat-icon>search</mat-icon> Search
       </button>
-      <button mat-flat-button color="primary" (click)="onClickUserCreate()">
+      <button mat-flat-button color="primary" (click)="onConfirm()">
         <mat-icon>person_add</mat-icon>Add User
       </button>
     </div>
@@ -41,8 +41,8 @@
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Name </th>
         <td mat-cell *matCellDef="let user">
-          <button mat-stroked-button (click)="getEachUser(user.id)" color="primary">
-            <mat-icon>menu</mat-icon> {{user.name}}
+          <button mat-stroked-button (click)="getEachUserData(user.id)" color="primary">
+            {{user.user.username}}
           </button>
         </td>
       </ng-container>
@@ -50,13 +50,24 @@
       <!-- Email Column -->
       <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef> Email </th>
-        <td mat-cell *matCellDef="let user"> {{user.email}} </td>
+        <td mat-cell *matCellDef="let user"> {{user.user.email}} </td>
+      </ng-container>
+
+      <!-- Profile Column -->
+      <ng-container matColumnDef="profile">
+        <th mat-header-cell *matHeaderCellDef> Profile </th>
+        <td mat-cell *matCellDef="let user" class="profile"> 
+          <img src="{{apiUrl+user.profile}}" alt="User Profile">
+        </td>
+
+        <!-- <td mat-cell *matCellDef="let user"> {{profileUrl}}{{user.profile}} </td> -->
       </ng-container>
 
       <!-- Created User Column -->
       <ng-container matColumnDef="created_user_id">
         <th mat-header-cell *matHeaderCellDef> Created User </th>
-        <td mat-cell *matCellDef="let user"> {{user.user_name}} </td>
+        <td mat-cell *matCellDef="let user"> {{user?.createdBy?.firstname ? user?.createdBy?.firstname : 'test'}} </td>
+        <!-- <td mat-cell *matCellDef="let user"> Created User </td> -->
       </ng-container>
 
       <!-- Phone Column -->
@@ -80,13 +91,13 @@
       <!-- Created Date Column -->
       <ng-container matColumnDef="created_at">
         <th mat-header-cell *matHeaderCellDef> Created Date </th>
-        <td mat-cell *matCellDef="let user"> {{user.created_at | date: 'shortDate'}} </td>
+        <td mat-cell *matCellDef="let user"> {{user.createdAt | date: 'shortDate'}} </td>
       </ng-container>
 
       <!-- Updated Date Column -->
       <ng-container matColumnDef="updated_at">
         <th mat-header-cell *matHeaderCellDef> Updated Date </th>
-        <td mat-cell *matCellDef="let user"> {{user.updated_at | date: 'shortDate'}} </td>
+        <td mat-cell *matCellDef="let user"> {{user.updatedAt | date: 'shortDate'}} </td>
       </ng-container>
 
       <!-- Delete Column -->

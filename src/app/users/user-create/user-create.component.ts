@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
+// service
 import { SharingDataService } from 'src/app/services/sharing-data.service';
+
+// validator
 import { MustMatch } from 'src/app/validators/must-match.validator';
 
 @Component({
@@ -11,17 +15,20 @@ import { MustMatch } from 'src/app/validators/must-match.validator';
 })
 export class UserCreateComponent implements OnInit {
 
+  userForm!: FormGroup;
   value!: number;
   label!: string;
   typeOption = [
     { value: 0, label: 'Admin' },
     { value: 1, label: 'User' }
   ];
-  userForm!: FormGroup;
-  public userId: number = 0;
-  public userDetail: any;
-  public existingUser: any;
-  public isEditUser: boolean = true;
+  file!: File;
+  profileUrl: any;
+  profileImg: any;
+  userId: number = 0;
+  userDetail: any;
+  existingUser: any;
+  isEditUser: boolean = true;
 
   constructor(
     private fb: FormBuilder,
@@ -54,6 +61,7 @@ export class UserCreateComponent implements OnInit {
     const data = this.shareDataSvc.getUserData();
     this.userDetail = data;
     if (this.userDetail) {
+      this.profileUrl = this.userDetail.profile
       this.userForm.setValue({
         name: this.userDetail.name ?? null,
         email: this.userDetail.email ?? null,
@@ -79,6 +87,17 @@ export class UserCreateComponent implements OnInit {
     }
   }
 
+  onSelectFile(e: any) {
+    if (e.target.files) {
+      var reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+      this.file = e.target.files[0];
+      reader.onload = (event: any) => {
+        this.profileUrl = event.target.result;
+      }
+    }
+  }
+
   confirmUser() {
     this.shareDataSvc.setUserData({
       userId: this.userId,
@@ -90,6 +109,8 @@ export class UserCreateComponent implements OnInit {
       phone: this.userForm.value.phone,
       dob: this.userForm.value.dob,
       address: this.userForm.value.address,
+      profile: this.profileUrl,
+      file: this.file
     });
     this.router.navigate(['/user-confirm']);
   }

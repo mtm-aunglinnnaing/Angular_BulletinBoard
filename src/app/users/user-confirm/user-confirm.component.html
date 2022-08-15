@@ -29,6 +29,10 @@
       <td class="sub-ttl">Address</td>
       <td>{{userData.address}}</td>
     </tr>
+    <tr>
+      <td class="sub-ttl">Profile</td>
+      <td> <img width="150" height="150" style="border-radius:15px;" src={{userData?.profile}}></td>
+    </tr>
   </table>
   <div class="button-group">
     <button mat-flat-button (click)="createUser()" color="primary">Create</button>

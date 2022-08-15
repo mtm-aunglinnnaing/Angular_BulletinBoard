@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  userInfo = JSON.parse(localStorage.getItem('userInfo') || '[]');
+
   constructor(
     private router: Router,
   ) { }
@@ -14,9 +14,14 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (!this.userInfo.id) {
+    // if (!this.userInfo.id) {
+    //   this.router.navigate(['/login']);
+    //   return false;
+    // }
+    const token = localStorage.getItem('token');
+    if(!token){
       this.router.navigate(['/login']);
-      return false;
+        return false;
     }
     return true;
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +10,13 @@ import { NavigationEnd, Router } from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'bulletinboard-ojt';
   showNavBar = true;
-  user: any = null;
-  userData: any;
+  role: any;
+  token: any;
+  name: any;
+  // user: any = null;
+  // userData: any;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authSvc: AuthService) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         if (this.router.url === '/login' || this.router.url === '/') {
@@ -20,13 +24,23 @@ export class AppComponent implements OnInit {
         } else {
           this.showNavBar = true;
         }
-        this.user = localStorage.getItem('userInfo');
-        this.user = JSON.parse(this.user);
+        this.token = localStorage.getItem('token');
       }
     });
+
   }
 
   ngOnInit(): void {
+    this.name = localStorage.getItem('username');
+    this.authSvc.name.next(this.name);
+    this.authSvc.name.subscribe((data: string | null) => {
+      this.name = data;
+    });
+    this.role = localStorage.getItem('role');
+    this.authSvc.role.next(this.role);
+    this.authSvc.role.subscribe((data: string | null) => {
+      this.role = data;
+    });
   }
 
   logout() {

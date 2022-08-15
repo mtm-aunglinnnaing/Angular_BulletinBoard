@@ -30,77 +30,106 @@ export class UserUpdateConfirmComponent implements OnInit {
   ngOnInit(): void {
     this.userData = this.shareDataSvc.getUserData();
     this.userId = this.userData.userId;
-    this.getUserList();
-    if (this.userId) {
-      this.getEachUser();
-    }
-    this.userInfo = JSON.parse(localStorage.getItem('userInfo') || "[]");
+    // this.getUserList();
+    // if (this.userId) {
+      this.getEachUserData();
+    // }
+    // this.userInfo = JSON.parse(localStorage.getItem('userInfo') || "[]");
   }
 
-  getUserList() {
-    this.userSvc.getUser().subscribe({
-      next: result => {
-        this.userList = result;
-      },
-      error: err => {
-        console.log('=== handle error ====')
-        console.log(err)
-      }
-    });
-  }
+  // getUserList() {
+  //   this.userSvc.getUser().subscribe({
+  //     next: result => {
+  //       this.userList = result;
+  //     },
+  //     error: err => {
+  //       console.log('=== handle error ====')
+  //       console.log(err)
+  //     }
+  //   });
+  // }
 
-  getEachUser() {
-    this.userSvc.getUserDetail(this.userId).subscribe({
+  getEachUserData() {
+    this.userSvc.getEachUser(this.userId).subscribe({
       next: result => {
         this.userListDetail = result;
+        console.log('detail')
+        console.log(this.userListDetail);
       },
       error: err => {
-        console.log('=== handle error ====')
-        console.log(err)
+        console.log('=== handle error ===');
+        console.log(err);
       }
     });
   }
 
   createUser() {
-    const duplicate = this.userList.filter((item: any) => item.email === this.userData.email && item.id != this.userId);
-    if (duplicate.length > 0) {
-      this.dialog.open(PlainModalComponent, {
-        data: {
-          content: ` User with ${this.userData.email} already exists !`,
-          note: '',
-          applyText: 'Ok'
-        }
-      });
-      return;
-    }
     const data = {
-      id: this.userId,
-      name: this.userData.name,
-      email: this.userData.email,
-      password: this.userListDetail.password,
-      type: this.userData.type,
-      phone: this.userData.phone,
-      dob: this.userData.dob,
-      address: this.userData.address,
-      created_user_id: this.userListDetail.created_user_id,
-      updated_user_id: this.userInfo.id,
-      deleted_user_id: this.userInfo.id,
-      created_at: this.userListDetail.created_at,
-      updated_at: new Date(),
-      is_removed: false
+      "data": {
+        "name": this.userData.name,
+        "email": this.userData.email,
+        "type": this.userData.type,
+        "phone": this.userData.phone,
+        "dob": this.userData.dob,
+        "address": this.userData.address,
+        "profile": '/uploads/poe_square_a8bc6e07fc.jpg'
+      }
     };
-    this.userSvc.updateUser(data, this.userId)
-      .subscribe({
-        next: result => {
-          this.shareDataSvc.setUserData(null);
-        },
-        error: err => {
-          console.log('=== handle error ====')
-          console.log(err)
-        }
-      });
-    this.snackBar.open('User Updated Successfully!', '', { duration: 3000 });
-    this.router.navigate(['/user-list']);
+    console.log(this.userData);
+    console.log(this.userListDetail.user.email);
+    
+    this.userSvc.updateUser(data, this.userId).subscribe({
+      next: res => {
+        this.snackBar.open('User Updated Successfully!', '', { duration: 3000 });
+        this.router.navigate(['/user-list']);
+      },
+      error: err => {
+        console.log('=== handle error ===');
+        console.log(err);
+      }
+    })
+  
+
+
+    // const duplicate = this.userList.filter((item: any) => item.email === this.userData.email && item.id != this.userId);
+    // if (duplicate.length > 0) {
+    //   this.dialog.open(PlainModalComponent, {
+    //     data: {
+    //       content: ` User with ${this.userData.email} already exists !`,
+    //       note: '',
+    //       applyText: 'Ok'
+    //     }
+    //   });
+    //   return;
+    // }
+    // const data = {
+    //   id: this.userId,
+    //   name: this.userData.name,
+    //   email: this.userData.email,
+    //   password: this.userListDetail.password,
+    //   type: this.userData.type,
+    //   phone: this.userData.phone,
+    //   dob: this.userData.dob,
+    //   address: this.userData.address,
+    //   created_user_id: this.userListDetail.created_user_id,
+    //   updated_user_id: this.userInfo.id,
+    //   deleted_user_id: this.userInfo.id,
+    //   created_at: this.userListDetail.created_at,
+    //   updated_at: new Date(),
+    //   is_removed: false
+    // };
+    // this.userSvc.updateUser(data, this.userId)
+    //   .subscribe({
+    //     next: result => {
+    //       this.shareDataSvc.setUserData(null);
+    //     },
+    //     error: err => {
+    //       console.log('=== handle error ====')
+    //       console.log(err)
+    //     }
+    //   });
+    // this.snackBar.open('User Updated Successfully!', '', { duration: 3000 });
+    // this.router.navigate(['/user-list']);
   }
 
   goBackUserCreate() {
